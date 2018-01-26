@@ -48,16 +48,18 @@ export default class App extends React.Component {
     return (
       <TouchableHighlight onLongPress={()=>{this.removeItem(index)}}>
         <View style={[styles.row, !item.isActive && styles.inactiveRow]}>
-          <Text>{item.text}-{item.lastModified}-{item.isActive.toString()}</Text>
+          <Text>{item.text}</Text>
         </View>
       </TouchableHighlight>
     )
   }
 
-  addItem = ({text})=> {
-    this.state.items.push({key: Date.now(), text: this.state.newItem, lastModified: Date.now(), isActive: true})  
-    this.setState({items: groupArrayBy(this.state.items.sort(sortByDateDesc), "isActive"), newItem: ''})
-    this.forceUpdate()
+  addItem = ()=> {
+    if(this.state.newItem){
+      this.state.items.push({key: Date.now(), text: this.state.newItem, lastModified: Date.now(), isActive: true})  
+      this.setState({items: groupArrayBy(this.state.items.sort(sortByDateDesc), "isActive"), newItem: ''})
+      this.forceUpdate()
+    }
   }
 
   changeText = (text) => {
@@ -65,15 +67,18 @@ export default class App extends React.Component {
   }
 
   render() {
-    let newItemValue = ''
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Si[mple]-Li[st]</Text>  
-        <TextInput 
-          value={this.state.newItem} placeholder='type to add a new item' 
-          onSubmitEditing={this.addItem} onChangeText={this.changeText} 
-          underlineColorAndroid='transparent' style={styles.newItem}/>
-        <Button title="Add" onPress={this.addItem}/>
+        <View style={{height: 60, flexDirection: 'row', justifyContent: 'space-between', padding: 10}}>
+          <TextInput 
+            value={this.state.newItem} placeholder='type to add a new item' 
+            onSubmitEditing={this.addItem} onChangeText={this.changeText} 
+            style={{flex: 1}} underlineColorAndroid='transparent'/>
+          <Button title="Add" onPress={this.addItem}
+            color='purple' 
+            style={{flex: 1}}/>
+        </View>
         <FlatList
             data={this.state.items}
             renderItem={this.renderItem}
@@ -99,18 +104,9 @@ const styles = StyleSheet.create({
   row: {
     padding: 15,
     marginBottom: 5,
-    backgroundColor: 'skyblue',
-    justifyContent: 'space-between'
+    backgroundColor: 'skyblue'
   }, 
   inactiveRow: {
     backgroundColor: 'gray'
-  },
-  operator:{
-    fontSize: 30,
-    color: 'white',
-    width: 30
-  },
-  newItem: {
-    padding: 15
   }
 });
