@@ -1,7 +1,9 @@
 # si-li
 **Si**mple **Li**st
 
-This is a simple list app built with React Native and Expo. It's meant to do the following:
+This is a simple list app built with [React Native](https://facebook.github.io/react-native/) and [Expo](https://expo.io/). It can be installed through the [Expo Client](https://expo.io/tools#client) [here](https://expo.io/@fibina/simple-list).
+
+The simple list app is meant to do the following:
 
 - display a list of items where an item is a text
 - add a new item
