@@ -4,9 +4,6 @@ import { StyleSheet, Text, View, FlatList, TouchableHighlight, Button, ListView,
 let rows = []
 const now = Date.now();
 
-for(let i=0;i<=20;i++){
-    rows.push({key: now+i, text: `Item #${i}`, lastModified: now, isActive: true})}
-
 const itemKeyExtractor = ({key}) => key
 
 const groupArrayBy = (arr, key) =>{
