@@ -70,7 +70,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Si[mple]-Li[st]</Text>  
-        <View style={{height: 60, flexDirection: 'row', justifyContent: 'space-between', padding: 10}}>
+        <View style={{height: 60, flexDirection: 'row', padding: 10}}>
           <TextInput 
             value={this.state.newItem} placeholder='type to add a new item' 
             onSubmitEditing={this.addItem} onChangeText={this.changeText} 
