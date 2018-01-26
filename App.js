@@ -66,7 +66,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Si[mple]-Li[st]</Text>  
+        <Text style={styles.title}>a simple list</Text>  
         <View style={{height: 60, flexDirection: 'row', padding: 10}}>
           <TextInput 
             value={this.state.newItem} placeholder='type to add a new item' 
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    backgroundColor: 'pink',
+    backgroundColor: '#ef7de7',
     padding: 15,
     marginBottom: 5,
     alignItems: 'center'
@@ -101,9 +101,11 @@ const styles = StyleSheet.create({
   row: {
     padding: 15,
     marginBottom: 5,
-    backgroundColor: 'skyblue'
+    backgroundColor: '#76B59B'
   }, 
   inactiveRow: {
     backgroundColor: 'gray'
   }
 });
+
+// #ef7de7 - pink; #76B59B - green

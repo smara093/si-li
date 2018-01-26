@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "si-li",
-    "description": "This project is really great.",
-    "slug": "si-li",
+    "description": "A simple list app. More details and source code at https://github.com/smara093/si-li.",
+    "slug": "simple-list",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
@@ -12,7 +12,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ef7de7"
     },
     "ios": {
       "supportsTablet": true
