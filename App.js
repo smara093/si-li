@@ -47,7 +47,7 @@ export default class App extends React.Component {
   renderItem = ({item, index})=>{
     return (
       <TouchableHighlight onLongPress={()=>{this.removeItem(index)}}>
-        <View style={styles.row}>
+        <View style={[styles.row, !item.isActive && styles.inactiveRow]}>
           <Text>{item.text}-{item.lastModified}-{item.isActive.toString()}</Text>
         </View>
       </TouchableHighlight>
@@ -102,6 +102,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'skyblue',
     justifyContent: 'space-between'
   }, 
+  inactiveRow: {
+    backgroundColor: 'gray'
+  },
   operator:{
     fontSize: 30,
     color: 'white',
