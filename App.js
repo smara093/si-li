@@ -60,12 +60,19 @@ export default class App extends React.Component {
     this.forceUpdate()
   }
 
+  changeText = (text) => {
+    this.setState({items: this.state.items, newItem: text})
+  }
+
   render() {
     let newItemValue = ''
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Si[mple]-Li[st]</Text>  
-        <TextInput value={this.state.newItem} placeholder='type to add a new item' onChangeText={(text) => this.setState({items: this.state.items, newItem: text})} underlineColorAndroid='transparent' style={styles.newItem}/>
+        <TextInput 
+          value={this.state.newItem} placeholder='type to add a new item' 
+          onSubmitEditing={this.addItem} onChangeText={this.changeText} 
+          underlineColorAndroid='transparent' style={styles.newItem}/>
         <Button title="Add" onPress={this.addItem}/>
         <FlatList
             data={this.state.items}
