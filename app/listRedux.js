@@ -1,7 +1,8 @@
 export const types = {
   ADD: "ADD",
   REMOVE: "REMOVE",
-  UPDATE_TEXT: "UPDATE_TEXT"
+  UPDATE_TEXT: "UPDATE_TEXT",
+  CLEAR: "CLEAR"
 };
 
 export const actionCreators = {
@@ -13,6 +14,9 @@ export const actionCreators = {
   },
   updateText: text => {
     return { type: types.UPDATE_TEXT, data: text };
+  },
+  clearItems: () => {
+    return { type: types.CLEAR };
   }
 };
 
@@ -62,6 +66,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         newItem: data
+      };
+    }
+    case types.CLEAR: {
+      return {
+        ...state,
+        items: []
       };
     }
   }

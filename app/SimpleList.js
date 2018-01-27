@@ -59,6 +59,11 @@ class SimpleList extends React.Component {
 
   itemKeyExtractor = ({ key }) => key;
 
+  clearItems = () => {
+    const { dispatch } = this.props;
+    dispatch(actionCreators.clearItems());
+  };
+
   render() {
     const { items, newItem } = this.props;
 
@@ -87,6 +92,7 @@ class SimpleList extends React.Component {
           keyExtractor={this.itemKeyExtractor}
           extraData={this.state}
         />
+        <Button title="Clear Items" onPress={this.clearItems} color="purple" />
       </View>
     );
   }
