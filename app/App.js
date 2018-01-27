@@ -3,7 +3,7 @@ import Expo from 'expo';
 import SimpleList from './SimpleList';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { reducer } from './listReducer'
+import { reducer } from './listRedux'
 
 const store = createStore(reducer)
 

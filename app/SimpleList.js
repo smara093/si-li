@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, FlatList, TouchableHighlight, Button, ListView, TextInput } from 'react-native';
 import { connect } from 'react-redux'
-import { actionCreators } from './listReducer';
+import { actionCreators } from './listRedux';
 import styles from './styles'
 
 const mapStateToProps = (state) => ({
