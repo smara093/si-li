@@ -1,8 +1,9 @@
-import React from 'react';
-import { Text, View, FlatList, TouchableHighlight, Button, ListView, TextInput } from 'react-native';
+import React from 'react'
+import { Text, View, FlatList, TouchableHighlight, Button, ListView, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { actionCreators } from './listRedux';
+import { actionCreators } from './listRedux'
 import styles from './styles'
+import Title from './Title'
 
 const mapStateToProps = (state) => ({
     items: state.items,
@@ -44,7 +45,7 @@ class SimpleList extends React.Component {
         
         return (
             <View style={styles.container}>
-            <Text style={styles.title}>a simple list</Text>  
+            <Title styles={styles} text='a simple list' />  
             <View style={{height: 60, flexDirection: 'row', padding: 10}}>
                 <TextInput 
                 placeholder='type to add a new item' value={newItem}
