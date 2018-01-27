@@ -9,6 +9,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "githubUrl": "https://github.com/smara093/si-li", 
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
