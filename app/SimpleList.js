@@ -1,5 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableHighlight, Button, ListView, TextInput } from 'react-native';
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state) => ({
+    items: state.items,
+  })
 
 let rows = []
 const now = Date.now();
@@ -27,19 +32,20 @@ const sortByDateDesc = (a, b) =>{
   return b.lastModified-a.lastModified;
 }
 
-export default class SimpleList extends React.Component {
+class SimpleList extends React.Component {
     constructor(props){
       super(props)
       this.state = {items: groupArrayBy(rows.sort(sortByDateDesc), "isActive"), newItem:''}
-      console.log('Simple list was imported')
     }
   
     removeItem = (index) => {
+      const { dispatch } = this.props
       this.state.items[index].isActive = false
       this.state.items[index].lastModified = Date.now()
       this.state.items.sort(sortByDateDesc);
       this.setState({items: groupArrayBy(this.state.items, "isActive"), newItem:this.state.newItem})
       this.forceUpdate()
+      dispatch({type:"REMOVE"})
     }
   
     renderItem = ({item, index})=>{
@@ -53,11 +59,15 @@ export default class SimpleList extends React.Component {
     }
   
     addItem = ()=> {
+        const {dispatch} = this.props
+        console.log(this.props)
       if(this.state.newItem){
         this.state.items.push({key: Date.now(), text: this.state.newItem, lastModified: Date.now(), isActive: true})  
         this.setState({items: groupArrayBy(this.state.items.sort(sortByDateDesc), "isActive"), newItem: ''})
         this.forceUpdate()
       }
+
+      dispatch({type:"ADD"})
     }
   
     changeText = (text) => {
@@ -86,6 +96,8 @@ export default class SimpleList extends React.Component {
       );
     }
   }
+
+  export default connect(mapStateToProps)(SimpleList)
   
   const styles = StyleSheet.create({
     container: {
