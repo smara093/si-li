@@ -14,7 +14,8 @@ export const actionCreators = {
     updateText: (text) => {
         return {type: types.UPDATE_TEXT, data: text}
     }
-}  
+}
+  
 const initialState = { items: [], newItem: '' }
 
 const sortByDateDesc = (a, b) =>{

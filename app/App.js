@@ -5,11 +5,25 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { reducer } from './listRedux'
 
-const store = createStore(reducer)
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/lib/integration/react'
+
+const persistConfig = {
+  key: 'root',
+  storage: storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+
+let store = createStore(persistedReducer)
+let persistor = persistStore(store)
 
 const App = () => (
     <Provider store={store}>
-      <SimpleList />
+      <PersistGate persistor={persistor} loading={null}>
+        <SimpleList />
+      </PersistGate>
     </Provider>
     );
 
