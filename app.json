@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "si-li",
-    "description": "A simple list app. More details and source code at https://github.com/smara093/si-li.",
+    "description":
+      "A simple list app. More details and source code at https://github.com/smara093/si-li.",
     "slug": "simple-list",
     "privacy": "public",
     "sdkVersion": "25.0.0",
@@ -9,7 +10,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "githubUrl": "https://github.com/smara093/si-li", 
+    "githubUrl": "https://github.com/smara093/si-li",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
