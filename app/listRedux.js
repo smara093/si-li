@@ -6,8 +6,8 @@ export const types = {
 };
 
 export const actionCreators = {
-  add: text => {
-    return { type: types.ADD, data: text };
+  add: item => {
+    return { type: types.ADD, data: item };
   },
   remove: index => {
     return { type: types.REMOVE, data: index };
