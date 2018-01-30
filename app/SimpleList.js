@@ -25,8 +25,6 @@ class SimpleList extends React.Component {
   };
 
   renderItem = ({ item, index }) => {
-    console.log('attempting to use reflect now');
-    Reflect.deleteProperty(item, 'doesnexistpropname');
     return (
       <TouchableHighlight
         onLongPress={() => {
