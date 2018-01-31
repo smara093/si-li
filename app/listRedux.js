@@ -1,29 +1,21 @@
 export const types = {
-  ADD: "ADD",
-  REMOVE: "REMOVE",
-  UPDATE_TEXT: "UPDATE_TEXT",
-  CLEAR: "CLEAR"
+  ADD: 'ADD',
+  REMOVE: 'REMOVE',
+  UPDATE_TEXT: 'UPDATE_TEXT',
+  CLEAR: 'CLEAR',
 };
 
 export const actionCreators = {
-  add: item => {
-    return { type: types.ADD, data: item };
-  },
-  remove: index => {
-    return { type: types.REMOVE, data: index };
-  },
-  updateText: text => {
-    return { type: types.UPDATE_TEXT, data: text };
-  },
-  clearItems: () => {
-    return { type: types.CLEAR };
-  }
+  add: item => ({ type: types.ADD, data: item }),
+  remove: index => ({ type: types.REMOVE, data: index }),
+  updateText: text => ({ type: types.UPDATE_TEXT, data: text }),
+  clearItems: () => ({ type: types.CLEAR }),
 };
 
-const initialState = { items: [], newItem: "" };
+const initialState = { items: [], newItem: '' };
 
 const sortByDateDesc = (a, b) => {
-  if (a.lastModified == b.lastModified) {
+  if (a.lastModified === b.lastModified) {
     return a.text.localeCompare(b.text);
   }
 
@@ -31,50 +23,54 @@ const sortByDateDesc = (a, b) => {
 };
 
 const groupArrayBy = (arr, key) => {
-  let reduced = arr.reduce((r, current) => {
-    (r[current[key]] = r[current[key]] || []).push(current);
-    return r;
+  const reduced = arr.reduce((acc, current) => {
+    (acc[current[key]] = acc[current[key]] || []).push(current);
+    return acc;
   }, {});
 
   let r = [];
   const keys = Object.keys(reduced)
     .sort()
     .reverse();
-  for (let i = 0; i < keys.length; i++) r = r.concat(reduced[keys[i]]);
+  for (let i = 0; i < keys.length; i += 1) r = r.concat(reduced[keys[i]]);
   return r;
 };
 
 export const reducer = (state = initialState, action) => {
-  const { items, newItem } = state;
+  const { items } = state;
   const { type, data } = action;
   switch (type) {
     case types.ADD: {
+      data.id = items.length;
       return {
         ...state,
-        items: groupArrayBy([...items, data].sort(sortByDateDesc), "isActive"),
-        newItem: ""
+        items: groupArrayBy([...items, data].sort(sortByDateDesc), 'isActive'),
+        newItem: '',
       };
     }
     case types.REMOVE: {
       items[data].isActive = false;
       return {
         ...state,
-        items: groupArrayBy([...items].sort(sortByDateDesc), "isActive")
+        items: groupArrayBy([...items].sort(sortByDateDesc), 'isActive'),
       };
     }
     case types.UPDATE_TEXT: {
       return {
         ...state,
-        newItem: data
+        newItem: data,
       };
     }
     case types.CLEAR: {
       return {
         ...state,
-        items: []
+        items: [],
+      };
+    }
+    default: {
+      return {
+        ...state,
       };
     }
   }
-
-  return state;
 };

@@ -1,13 +1,26 @@
 {
   "main": "app/App.js",
   "private": true,
+  "scripts": {
+    "start": "exp start",
+    "test": "~"
+  },
   "dependencies": {
     "expo": "^25.0.0",
+    "prop-types": "^15.6.0",
     "react": "16.2.0",
-    "react-native":
-      "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-persist": "^5.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "prettier": "^1.10.2"
   }
 }

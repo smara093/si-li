@@ -1,9 +1,17 @@
-import React from "react";
-import { Text } from "react-native";
+import React from 'react';
+import * as PropTypes from 'prop-types';
+import { Text } from 'react-native';
 
-export default class Title extends React.Component {
+class Title extends React.Component {
   render() {
     const { text, styles } = this.props;
     return <Text style={styles.title}>{text}</Text>;
   }
 }
+
+Title.propTypes = {
+  styles: PropTypes.object.isRequired,
+  text: PropTypes.string.isRequired,
+};
+
+export default Title;
