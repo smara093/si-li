@@ -1,16 +1,4 @@
-export const types = {
-  ADD: 'ADD',
-  REMOVE: 'REMOVE',
-  UPDATE_TEXT: 'UPDATE_TEXT',
-  CLEAR: 'CLEAR',
-};
-
-export const actionCreators = {
-  add: item => ({ type: types.ADD, data: item }),
-  remove: index => ({ type: types.REMOVE, data: index }),
-  updateText: text => ({ type: types.UPDATE_TEXT, data: text }),
-  clearItems: () => ({ type: types.CLEAR }),
-};
+import { types } from '../constants/actionTypes';
 
 const initialState = { items: [], newItem: '' };
 
@@ -36,11 +24,11 @@ const groupArrayBy = (arr, key) => {
   return r;
 };
 
-export const reducer = (state = initialState, action) => {
-  const { items } = state;
+export const simpleListReducer = (state = initialState, action) => {
+  const { items, newItem } = state;
   const { type, data } = action;
   switch (type) {
-    case types.ADD: {
+    case types.ADD_LIST_ITEM: {
       data.id = items.length;
       return {
         ...state,
@@ -48,7 +36,7 @@ export const reducer = (state = initialState, action) => {
         newItem: '',
       };
     }
-    case types.REMOVE: {
+    case types.REMOVE_LIST_ITEM: {
       items[data].isActive = false;
       return {
         ...state,
@@ -61,7 +49,7 @@ export const reducer = (state = initialState, action) => {
         newItem: data,
       };
     }
-    case types.CLEAR: {
+    case types.CLEAR_LIST: {
       return {
         ...state,
         items: [],
