@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "exp start",
-    "test": "jest"
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "dependencies": {
     "expo": "^25.0.0",

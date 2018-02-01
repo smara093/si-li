@@ -1,8 +1,8 @@
-import 'react-native';
-import React from 'react';
-import SimpleList from '../components/SimpleList';
+// import 'react-native';
+// import React from 'react';
+// import SimpleList from '../components/SimpleList';
 
-import renderer from 'react-test-renderer';
+// import renderer from 'react-test-renderer';
 
 // TODO: figure out how to mock root component with store and reducer
 // test('renders correctly', () => {
