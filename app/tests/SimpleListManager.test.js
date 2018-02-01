@@ -15,7 +15,8 @@ test('new empty object with default values can be created', () => {
 
 test('new object can be created', () => {
   const sut = new SimpleListManager([new SimpleListItem('item1'), new SimpleListItem('item2')]);
-  expect(sut.items).toMatchObject([new SimpleListItem('item1'), new SimpleListItem('item2')]);
+  expect(sut.items[0].text).toBe('item1');
+  expect(sut.items[1].text).toBe('item2');
 });
 
 test('can add a new item to the list', () => {
