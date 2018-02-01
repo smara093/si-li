@@ -3,8 +3,8 @@ import Expo from 'expo';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
-import SimpleList from './SimpleList';
-import { store, persistor } from './storeConfig';
+import SimpleList from './components/SimpleList';
+import { store, persistor } from './config/storeConfig';
 
 const App = () => (
   <Provider store={store}>

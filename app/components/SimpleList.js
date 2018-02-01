@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, FlatList, TouchableHighlight, Button, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { actionCreators } from './listRedux';
-import styles from './styles';
+import * as simpleListActions from '../actions/simpleListActions';
+import styles from './styles/SimpleListStyles';
 import Title from './Title';
 
 const mapStateToProps = state => ({
@@ -22,23 +22,23 @@ class SimpleList extends React.Component {
 
   removeItem(index) {
     const { dispatch } = this.props;
-    dispatch(actionCreators.remove(index));
+    dispatch(simpleListActions.remove(index));
   }
 
   changeText(text) {
     const { dispatch } = this.props;
-    dispatch(actionCreators.updateText(text));
+    dispatch(simpleListActions.updateText(text));
   }
 
   clearItems() {
     const { dispatch } = this.props;
-    dispatch(actionCreators.clearItems());
+    dispatch(simpleListActions.clearItems());
   }
 
   addItem() {
     const { dispatch, newItem } = this.props;
     if (newItem) {
-      dispatch(actionCreators.add({
+      dispatch(simpleListActions.add({
         key: Date.now(),
         text: newItem,
         lastModified: Date.now(),
