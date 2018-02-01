@@ -1,4 +1,4 @@
-import { types } from '../constants/actionTypes';
+import types from '../constants/actionTypes';
 
 const initialState = { items: [], newItem: '' };
 
@@ -24,8 +24,8 @@ const groupArrayBy = (arr, key) => {
   return r;
 };
 
-export const simpleListReducer = (state = initialState, action) => {
-  const { items, newItem } = state;
+const simpleListReducer = (state = initialState, action) => {
+  const { items } = state;
   const { type, data } = action;
   switch (type) {
     case types.ADD_LIST_ITEM: {
@@ -62,3 +62,5 @@ export const simpleListReducer = (state = initialState, action) => {
     }
   }
 };
+
+export default simpleListReducer;

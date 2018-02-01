@@ -1,16 +1,16 @@
-import SimpleListItem from "./SimpleListItem";
+import SimpleListItem from './SimpleListItem';
 
 export default class SimpleList {
-    constructor(items = []) {
-        this.items = items;
-    }
+  constructor(items = []) {
+    this.items = items;
+  }
 
-    addItem = function(text){
-        this.items.push(new SimpleListItem(text));
-    }
+  addItem(text) {
+    this.items.push(new SimpleListItem(text));
+  }
 
-    removeItem = function(index){
-        this.items[index].isActive = false;
-        this.items[index].lastModified = Date.now();
-    }
+  removeItem(index) {
+    this.items[index].isActive = false;
+    this.items[index].lastModified = Date.now();
+  }
 }

@@ -1,6 +1,8 @@
-export const types = {
-    ADD_LIST_ITEM: "ADD_LIST_ITEM",
-    REMOVE_LIST_ITEM: "REMOVE_LIST_ITEM",
-    UPDATE_TEXT: "UPDATE_TEXT",
-    CLEAR_LIST: "CLEAR_LIST"
-  };
+const types = {
+  ADD_LIST_ITEM: 'ADD_LIST_ITEM',
+  REMOVE_LIST_ITEM: 'REMOVE_LIST_ITEM',
+  UPDATE_TEXT: 'UPDATE_TEXT',
+  CLEAR_LIST: 'CLEAR_LIST',
+};
+
+export default types;

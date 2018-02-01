@@ -1,6 +1,7 @@
 import SimpleList from "../core/SimpleList";
 import SimpleListItem from "../core/SimpleListItem";
 import { Date } from "core-js/library/web/timers";
+
 test("new empty object with default values can be created", () => {
   let sut = new SimpleList();
   expect(sut.items).toMatchObject([]);
@@ -48,7 +49,7 @@ test("can remove an item from the list", () => {
         createItem("item3", new Date(2017, 1, 1),
         createItem("item1", new Date(2017, 12, 12)),
         createItem("item2", new Date(2017, 6, 6)),
-        createItem("item0", new Date(2018, 1, 1))
+        createItem("item0", new Date(2018, 1, 1)),
     ]);
 
     sut.sortByDateDesc();
