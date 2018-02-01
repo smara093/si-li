@@ -1,5 +1,6 @@
 # si-li
-**Si**mple **Li**st
+**Si**mple **Li**st [![Build Status](https://travis-ci.org/smara093/si-li.svg?branch=master)](https://travis-ci.org/smara093/si-li)
+
 
 This is a simple list app built with [React Native](https://facebook.github.io/react-native/) and [Expo](https://expo.io/). It can be installed through the [Expo Client](https://expo.io/tools#client) [here](https://expo.io/@fibina/simple-list).
 
