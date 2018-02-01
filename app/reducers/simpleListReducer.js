@@ -1,46 +1,26 @@
 import types from '../constants/actionTypes';
+import SimpleListManager from '../core/SimpleListManager';
 
 const initialState = { items: [], newItem: '' };
-
-const sortByDateDesc = (a, b) => {
-  if (a.lastModified === b.lastModified) {
-    return a.text.localeCompare(b.text);
-  }
-
-  return b.lastModified - a.lastModified;
-};
-
-const groupArrayBy = (arr, key) => {
-  const reduced = arr.reduce((acc, current) => {
-    (acc[current[key]] = acc[current[key]] || []).push(current);
-    return acc;
-  }, {});
-
-  let r = [];
-  const keys = Object.keys(reduced)
-    .sort()
-    .reverse();
-  for (let i = 0; i < keys.length; i += 1) r = r.concat(reduced[keys[i]]);
-  return r;
-};
 
 const simpleListReducer = (state = initialState, action) => {
   const { items } = state;
   const { type, data } = action;
+  const simpleListManager = new SimpleListManager(items);
   switch (type) {
     case types.ADD_LIST_ITEM: {
-      data.id = items.length;
+      simpleListManager.addItem(data.text);
       return {
         ...state,
-        items: groupArrayBy([...items, data].sort(sortByDateDesc), 'isActive'),
+        items: simpleListManager.orderedItems.slice(),
         newItem: '',
       };
     }
     case types.REMOVE_LIST_ITEM: {
-      items[data].isActive = false;
+      simpleListManager.removeItem(data);
       return {
         ...state,
-        items: groupArrayBy([...items].sort(sortByDateDesc), 'isActive'),
+        items: simpleListManager.orderedItems.slice(),
       };
     }
     case types.UPDATE_TEXT: {
@@ -50,9 +30,10 @@ const simpleListReducer = (state = initialState, action) => {
       };
     }
     case types.CLEAR_LIST: {
+      simpleListManager.clear();
       return {
         ...state,
-        items: [],
+        items: simpleListManager.orderedItems.slice(),
       };
     }
     default: {
