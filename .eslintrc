@@ -1,7 +1,7 @@
 {
   "extends": ["airbnb", "plugin:react/recommended", "plugin:jest/recommended"],
   "rules": {
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": ["off"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": [false]
   }
