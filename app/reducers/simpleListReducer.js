@@ -1,26 +1,26 @@
 import types from '../constants/actionTypes';
-import SimpleListManager from '../core/SimpleListManager';
+import { getOrderedItems } from '../core/SimpleListUtilities';
 
 const initialState = { items: [], newItem: '' };
 
 const simpleListReducer = (state = initialState, action) => {
   const { items } = state;
   const { type, data } = action;
-  const simpleListManager = new SimpleListManager(items);
   switch (type) {
     case types.ADD_LIST_ITEM: {
-      simpleListManager.addItem(data.text);
+      data.id = items.length;
+      items.push(data);
       return {
         ...state,
-        items: simpleListManager.orderedItems.slice(),
+        items: getOrderedItems(items),
         newItem: '',
       };
     }
     case types.REMOVE_LIST_ITEM: {
-      simpleListManager.removeItem(data);
+      items[data] = { ...items[data], isActive: false, lastModified: Date.now() };
       return {
         ...state,
-        items: simpleListManager.orderedItems.slice(),
+        items: getOrderedItems(items),
       };
     }
     case types.UPDATE_TEXT: {
@@ -30,10 +30,9 @@ const simpleListReducer = (state = initialState, action) => {
       };
     }
     case types.CLEAR_LIST: {
-      simpleListManager.clear();
       return {
         ...state,
-        items: simpleListManager.orderedItems.slice(),
+        items: [],
       };
     }
     default: {

@@ -11,7 +11,6 @@ const mapDispatchToProps = dispatch => ({
   onAddItemClick: (newItem) => {
     if (newItem) {
       dispatch(simpleListActions.add({
-        key: Date.now(),
         text: newItem,
         lastModified: Date.now(),
         isActive: true,
