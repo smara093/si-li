@@ -1,59 +1,19 @@
 import React from 'react';
 import { Text, View, FlatList, TouchableHighlight, Button, TextInput } from 'react-native';
-import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import * as simpleListActions from '../actions/simpleListActions';
+
 import styles from './styles/SimpleListStyles';
 import Title from './Title';
 
-const mapStateToProps = state => ({
-  items: state.items,
-  newItem: state.newItem,
-});
+const itemKeyExtractor = item => item.id;
 
 class SimpleList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.itemKeyExtractor = item => item.id;
-    this.changeText = this.changeText.bind(this);
-    this.addItem = this.addItem.bind(this);
-    this.clearItems = this.clearItems.bind(this);
-  }
-
-  removeItem(index) {
-    const { dispatch } = this.props;
-    dispatch(simpleListActions.remove(index));
-  }
-
-  changeText(text) {
-    const { dispatch } = this.props;
-    dispatch(simpleListActions.updateText(text));
-  }
-
-  clearItems() {
-    const { dispatch } = this.props;
-    dispatch(simpleListActions.clearItems());
-  }
-
-  addItem() {
-    const { dispatch, newItem } = this.props;
-    if (newItem) {
-      dispatch(simpleListActions.add({
-        key: Date.now(),
-        text: newItem,
-        lastModified: Date.now(),
-        isActive: true,
-      }));
-    }
-  }
-
+  // render item should be its own dumb component, SimpleListItem
   renderItem(item, index) {
+    const { onRemoveItem } = this.props;
+
     return (
-      <TouchableHighlight
-        onLongPress={() => {
-          this.removeItem(index);
-        }}
-      >
+      <TouchableHighlight onLongPress={() => onRemoveItem(index)}>
         <View style={[styles.row, !item.isActive && styles.inactiveRow]}>
           <Text>{item.text}</Text>
         </View>
@@ -62,7 +22,9 @@ class SimpleList extends React.Component {
   }
 
   render() {
-    const { items, newItem } = this.props;
+    const {
+      items, newItem, onAddItemClick, onChangeText, onClearItemsClick,
+    } = this.props;
 
     return (
       <View style={styles.container}>
@@ -71,29 +33,37 @@ class SimpleList extends React.Component {
           <TextInput
             placeholder="type to add a new item"
             value={newItem}
-            onSubmitEditing={this.addItem}
-            onChangeText={this.changeText}
+            onSubmitEditing={() => onAddItemClick(newItem)}
+            onChangeText={text => onChangeText(text)}
             style={{ flex: 1 }}
             underlineColorAndroid="transparent"
           />
-          <Button title="Add" onPress={this.addItem} color="purple" style={{ flex: 1 }} />
+          <Button
+            title="Add"
+            onPress={() => onAddItemClick(newItem)}
+            color="purple"
+            style={{ flex: 1 }}
+          />
         </View>
         <FlatList
           data={items}
           renderItem={({ item, index }) => this.renderItem(item, index)}
-          keyExtractor={this.itemKeyExtractor}
+          keyExtractor={itemKeyExtractor}
           extraData={this.state}
         />
-        <Button title="Clear Items" onPress={this.clearItems} color="purple" />
+        <Button title="Clear Items" onPress={() => onClearItemsClick()} color="purple" />
       </View>
     );
   }
 }
 
 SimpleList.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   newItem: PropTypes.string.isRequired,
   items: PropTypes.array.isRequired,
+  onAddItemClick: PropTypes.func.isRequired,
+  onChangeText: PropTypes.func.isRequired,
+  onClearItemsClick: PropTypes.func.isRequired,
+  onRemoveItem: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(SimpleList);
+export default SimpleList;
