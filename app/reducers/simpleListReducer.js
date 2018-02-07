@@ -16,10 +16,20 @@ const simpleListReducer = (state = initialState, action) => {
       };
     }
     case types.REMOVE_LIST_ITEM: {
-      items[data] = { ...items[data], isActive: false, lastModified: Date.now() };
+      let updatedItems = [];
+      if (items[data].isActive === false) {
+        updatedItems = items.slice(0, data).concat(items.slice(data + 1));
+      } else {
+        items.splice(data, 1, {
+          ...items[data],
+          isActive: false,
+          lastModified: Date.now(),
+        });
+        updatedItems = items;
+      }
       return {
         ...state,
-        items: getOrderedItems(items),
+        items: getOrderedItems(updatedItems),
       };
     }
     case types.UPDATE_TEXT: {

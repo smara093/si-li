@@ -43,7 +43,7 @@ test('new item value is reset upon adding the new item', () => {
   expect(result.newItem).toBe('');
 });
 
-test('can remove list item', () => {
+test('can remove active list item', () => {
   const initialState = {
     items: [{ text: 'item1', isActive: true }, { text: 'item2', isActive: true }],
   };
@@ -51,6 +51,16 @@ test('can remove list item', () => {
   const result = simpleListReducer(initialState, action);
   expect(result.items).toHaveLength(2);
   expect(result.items[1].isActive).toBe(false);
+});
+
+test('can remove inactive list item', () => {
+  const initialState = {
+    items: [{ text: 'item1', isActive: false }, { text: 'item2', isActive: true }],
+  };
+  const action = { type: 'REMOVE_LIST_ITEM', data: 0 };
+  const result = simpleListReducer(initialState, action);
+  expect(result.items).toHaveLength(1);
+  expect(result.items[0]).toMatchObject({ text: 'item2', isActive: true });
 });
 
 test('order is preserved after removing an item, group by active status, order by active status asc, date desc', () => {
