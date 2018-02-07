@@ -7,6 +7,7 @@
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "dependencies": {
+    "@types/jest": "^22.1.1",
     "expo": "^25.0.0",
     "prop-types": "^15.6.0",
     "react": "16.2.0",

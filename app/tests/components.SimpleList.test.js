@@ -8,7 +8,3 @@ test('renders correctly', () => {
   const tree = renderer.create(<SimpleList />).toJSON();
   expect(tree).toMatchSnapshot();
 });
-
-test('true is true', () => {
-  expect(true).toBe(true);
-});

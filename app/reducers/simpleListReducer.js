@@ -9,10 +9,9 @@ const simpleListReducer = (state = initialState, action) => {
   switch (type) {
     case types.ADD_LIST_ITEM: {
       data.id = items.length;
-      items.push(data);
       return {
         ...state,
-        items: getOrderedItems(items),
+        items: getOrderedItems(items.concat([data])),
         newItem: '',
       };
     }
