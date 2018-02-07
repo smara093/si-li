@@ -1,24 +1,18 @@
 import React from 'react';
-import { Text, View, FlatList, TouchableHighlight, Button, TextInput } from 'react-native';
+import { View, FlatList, Button, TextInput } from 'react-native';
 import { PropTypes } from 'prop-types';
 
 import styles from './styles/SimpleListStyles';
 import Title from './Title';
+import SimpleListItem from './SimpleListItem';
 
 const itemKeyExtractor = item => item.id;
 
 class SimpleList extends React.Component {
-  // render item should be its own dumb component, SimpleListItem
   renderItem(item, index) {
     const { onRemoveItem } = this.props;
 
-    return (
-      <TouchableHighlight onLongPress={() => onRemoveItem(index)}>
-        <View style={[styles.row, !item.isActive && styles.inactiveRow]}>
-          <Text>{item.text}</Text>
-        </View>
-      </TouchableHighlight>
-    );
+    return <SimpleListItem onRemoveItem={onRemoveItem} index={index} item={item} styles={styles} />;
   }
 
   render() {
