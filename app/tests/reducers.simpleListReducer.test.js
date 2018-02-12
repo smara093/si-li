@@ -124,3 +124,9 @@ test('can clear the list of items', () => {
   const result = simpleListReducer(initialState, action);
   expect(result.items).toHaveLength(0);
 });
+
+test('initial state and action have a default', () => {
+  const result = simpleListReducer(undefined, { type: 'UNKNOWN' });
+
+  expect(result).toMatchObject({ items: [], newItem: '' });
+});
