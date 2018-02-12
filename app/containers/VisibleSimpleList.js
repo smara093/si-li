@@ -9,12 +9,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onAddItemClick: (newItem) => {
+    console.log('saving item now');
     if (newItem) {
-      dispatch(simpleListActions.add({
+      const listItem = {
         text: newItem,
         lastModified: Date.now(),
         isActive: true,
-      }));
+      };
+      dispatch(simpleListActions.saveItemToList(listItem));
     }
   },
   onRemoveItem: (index) => {
@@ -25,6 +27,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onClearItemsClick: () => {
     dispatch(simpleListActions.clearItems());
+  },
+  onComponentInit: () => {
+    dispatch(simpleListActions.initData());
   },
 });
 

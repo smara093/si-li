@@ -1,6 +1,7 @@
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { createStore } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
 import simpleListReducer from '../reducers/simpleListReducer';
 
@@ -9,6 +10,8 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, simpleListReducer);
-export const store = createStore(persistedReducer);
-export const persistor = persistStore(store);
+// const rootReducer = combineReducers(simpleListReducer);
+
+// const persistedReducer = persistReducer(persistConfig, simpleListReducer);
+export const store = createStore(simpleListReducer, applyMiddleware(thunkMiddleware));
+// export const persistor = persistStore(store);

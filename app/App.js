@@ -6,6 +6,10 @@ import { StackNavigator } from 'react-navigation';
 
 import { store, persistor } from './config/storeConfig';
 import ActiveList from './screens/active-list';
+import firebase from 'firebase';
+import { config } from './core/persistence/firebase';
+
+firebase.initializeApp(config);
 
 const RootStack = StackNavigator({
   ActiveList: {
@@ -15,9 +19,9 @@ const RootStack = StackNavigator({
 
 const App = () => (
   <Provider store={store}>
-    <PersistGate persistor={persistor}>
-      <RootStack />
-    </PersistGate>
+    {/* <PersistGate persistor={persistor}> */}
+    <RootStack />
+    {/* </PersistGate> */}
   </Provider>
 );
 

@@ -1,7 +1,12 @@
 import types from '../constants/actionTypes';
-import { getOrderedItems } from '../core/SimpleListUtilities';
+import { getOrderedItems } from '../core/utilities/SimpleListUtilities';
 
-const initialState = { items: [], newItem: '' };
+const initialState = {
+  listName: '',
+  owner: '',
+  items: [],
+  newItem: '',
+};
 
 const simpleListReducer = (state = initialState, action) => {
   const { items } = state;
@@ -9,9 +14,10 @@ const simpleListReducer = (state = initialState, action) => {
   switch (type) {
     case types.ADD_LIST_ITEM: {
       data.id = items.length;
+      const newList = getOrderedItems(items.concat([data]));
       return {
         ...state,
-        items: getOrderedItems(items.concat([data])),
+        items: newList,
         newItem: '',
       };
     }
@@ -42,6 +48,15 @@ const simpleListReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [],
+      };
+    }
+    case 'LIST_UPDATED': {
+      console.log('list updated');
+      console.log(data);
+      return {
+        ...state,
+        items: getOrderedItems(data),
+        newItem: '',
       };
     }
     default: {

@@ -9,6 +9,11 @@ import SimpleListItem from './SimpleListItem';
 const itemKeyExtractor = item => item.id;
 
 class SimpleList extends React.Component {
+  componentWillMount() {
+    console.log('comp will mount');
+    this.props.onComponentInit();
+  }
+
   renderItem(item, index) {
     const { onRemoveItem } = this.props;
 
@@ -58,6 +63,7 @@ SimpleList.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   onClearItemsClick: PropTypes.func.isRequired,
   onRemoveItem: PropTypes.func.isRequired,
+  onComponentInit: PropTypes.func.isRequired,
 };
 
 export default SimpleList;
