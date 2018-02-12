@@ -1,14 +1,9 @@
-// import 'react-native';
 import React from 'react';
-import { Button } from 'react-native';
 import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
+import { shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 import SimpleList from '../components/SimpleList';
-
-// setup
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 

@@ -7,6 +7,7 @@
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "dependencies": {
+    "@types/jest": "^22.1.1",
     "expo": "^25.0.0",
     "prop-types": "^15.6.0",
     "react": "16.2.0",
@@ -16,7 +17,6 @@
     "redux-persist": "^5.5.0"
   },
   "devDependencies": {
-    "@types/jest": "^22.1.1",
     "babel-jest": "^22.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",

@@ -9,11 +9,13 @@ class SimpleListItem extends React.PureComponent {
     } = this.props;
 
     return (
-      <TouchableHighlight onLongPress={() => onRemoveItem(index)}>
-        <View style={[styles.row, !item.isActive && styles.inactiveRow]}>
-          <Text>{item.text}</Text>
-        </View>
-      </TouchableHighlight>
+      <View>
+        <TouchableHighlight onLongPress={() => onRemoveItem(index)}>
+          <View style={[styles.row, !item.isActive && styles.inactiveRow]}>
+            <Text>{item.text}</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
     );
   }
 }
