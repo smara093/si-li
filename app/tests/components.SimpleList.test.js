@@ -18,7 +18,7 @@ beforeEach(() => {
     {
       text: 'item 1',
       isActive: true,
-      lastModified: new Date(2017, 1, 1, 1, 0, 0),
+      lastModified: '2017-02-01T01:00:00.000Z',
       id: 1,
     },
   ];
