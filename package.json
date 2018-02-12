@@ -3,11 +3,10 @@
   "private": true,
   "scripts": {
     "start": "exp start",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "dependencies": {
-    "@types/jest": "^22.1.1",
     "expo": "^25.0.0",
     "prop-types": "^15.6.0",
     "react": "16.2.0",
@@ -17,10 +16,14 @@
     "redux-persist": "^5.5.0"
   },
   "devDependencies": {
+    "@types/jest": "^22.1.1",
     "babel-jest": "^22.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -29,10 +32,28 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
     "jest": "^22.1.4",
+    "jest-enzyme": "^4.2.0",
+    "jest-serializer-enzyme": "^1.0.0",
     "prettier": "^1.10.2",
+    "react-dom": "^16.2.0",
+    "react-native-mock": "^0.3.1",
     "react-test-renderer": "^16.2.0"
   },
   "jest": {
-    "preset": "react-native"
-  }
+    "preset": "react-native",
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": -10
+      }
+    }
+  },
+  "name": "si-li",
+  "version": "1.0.0",
+  "description": "simple list",
+  "repository": "https://github.com/smaraf/si-li.git",
+  "author": "Smaranda Fournier <smaranda.onutu@gmail.com>",
+  "license": "MIT"
 }

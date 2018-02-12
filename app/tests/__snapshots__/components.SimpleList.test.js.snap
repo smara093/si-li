@@ -45,7 +45,7 @@ exports[`renders correctly 1`] = `
         }
       }
       underlineColorAndroid="transparent"
-      value={undefined}
+      value=""
     />
     <View
       accessibilityComponentType="button"
@@ -108,7 +108,16 @@ exports[`renders correctly 1`] = `
     </View>
   </View>
   <RCTScrollView
-    data={undefined}
+    data={
+      Array [
+        Object {
+          "id": 1,
+          "isActive": true,
+          "lastModified": 2017-02-01T05:00:00.000Z,
+          "text": "item 1",
+        },
+      ]
+    }
     disableVirtualization={false}
     extraData={null}
     getItem={[Function]}
@@ -132,7 +141,54 @@ exports[`renders correctly 1`] = `
     viewabilityConfigCallbackPairs={Array []}
     windowSize={21}
   >
-    <View />
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={null}
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#76B59B",
+                  "marginBottom": 5,
+                  "padding": 15,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              item 1
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
   </RCTScrollView>
   <View
     accessibilityComponentType="button"
