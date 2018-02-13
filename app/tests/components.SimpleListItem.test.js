@@ -25,5 +25,5 @@ test('remove item function is called on long press', () => {
   const item = wrapper.find('TouchableHighlight');
   item.simulate('longPress');
   expect(removeItemSpy.mock.calls).toHaveLength(1);
-  expect(removeItemSpy.mock.calls[0][0]).toBe(2);
+  expect(removeItemSpy.mock.calls[0][0]).toMatchObject({ text: 'test' });
 });

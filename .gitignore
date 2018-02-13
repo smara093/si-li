@@ -4,3 +4,4 @@ npm-debug.*
 TODO
 /coverage
 yarn-error.log
+app/core/persistence/firebase-config.js

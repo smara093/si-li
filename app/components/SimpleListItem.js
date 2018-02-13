@@ -4,13 +4,11 @@ import { PropTypes } from 'prop-types';
 
 class SimpleListItem extends React.PureComponent {
   render() {
-    const {
-      onRemoveItem, index, item, styles,
-    } = this.props;
+    const { onRemoveItem, item, styles } = this.props;
 
     return (
       <View>
-        <TouchableHighlight onLongPress={() => onRemoveItem(index)}>
+        <TouchableHighlight onLongPress={() => onRemoveItem(item)}>
           <View style={[styles.row, !item.isActive && styles.inactiveRow]}>
             <Text>{item.text}</Text>
           </View>
@@ -22,7 +20,6 @@ class SimpleListItem extends React.PureComponent {
 
 SimpleListItem.propTypes = {
   onRemoveItem: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
   item: PropTypes.object.isRequired,
   styles: PropTypes.object.isRequired,
 };

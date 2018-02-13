@@ -1,18 +1,6 @@
 import types from '../constants/actionTypes';
 import * as firebaseDataStore from '../core/persistence/firebase';
 
-export function add(item) {
-  return { type: types.ADD_LIST_ITEM, data: item };
-}
-
-export function remove(index) {
-  return { type: types.REMOVE_LIST_ITEM, data: index };
-}
-
-export function clearItems() {
-  return { type: types.CLEAR_LIST };
-}
-
 // TODO: move this to own component actions, should be reusable on its own.
 export function updateText(text) {
   return { type: types.UPDATE_TEXT, data: text };
@@ -25,8 +13,23 @@ export function saveItemToList(item) {
 }
 
 export function initData() {
-  return async (dispatch) => {
-    console.log('init data');
+  return (dispatch) => {
     firebaseDataStore.initData(dispatch);
+  };
+}
+
+export function removeItemFromList(item) {
+  return () => {
+    if (item.isActive === true) {
+      firebaseDataStore.updateItem(Object.assign({}, item, { isActive: false, lastModified: Date.now() }));
+    } else {
+      firebaseDataStore.removeItem(item);
+    }
+  };
+}
+
+export function clearList() {
+  return () => {
+    firebaseDataStore.clearList();
   };
 }

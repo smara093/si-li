@@ -5,7 +5,7 @@
 */
 export const getOrderedItems = (items) => {
   const dateDescCompare = (a, b) => {
-    if (a.lastModified === b.lastModified) {
+    if (a.lastModified.valueOf() === b.lastModified.valueOf()) {
       return a.text.localeCompare(b.text);
     }
 

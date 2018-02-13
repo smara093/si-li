@@ -10,7 +10,6 @@ const itemKeyExtractor = item => item.id;
 
 class SimpleList extends React.Component {
   componentWillMount() {
-    console.log('comp will mount');
     this.props.onComponentInit();
   }
 
