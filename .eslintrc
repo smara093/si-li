@@ -1,5 +1,6 @@
 {
   "extends": ["airbnb", "plugin:react/recommended", "plugin:jest/recommended"],
+  "parser": "babel-eslint",
   "rules": {
     "linebreak-style": ["off"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
