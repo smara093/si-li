@@ -5,8 +5,9 @@ import { StackNavigator } from 'react-navigation';
 import firebase from 'firebase';
 
 import { store } from './config/storeConfig';
-import ActiveList from './screens/active-list';
-import Login from './screens/login';
+import ActiveListScreen from './screens/active-list';
+import ListsScreen from './screens/lists';
+import LoginScreen from './screens/login';
 import config from './core/persistence/firebase-config';
 
 firebase.initializeApp(config);
@@ -14,10 +15,13 @@ firebase.initializeApp(config);
 const RootStack = StackNavigator(
   {
     ActiveList: {
-      screen: ActiveList,
+      screen: ActiveListScreen,
     },
     Login: {
-      screen: Login,
+      screen: LoginScreen,
+    },
+    Lists: {
+      screen: ListsScreen,
     },
   },
   {

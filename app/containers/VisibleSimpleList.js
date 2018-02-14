@@ -32,6 +32,6 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const VisibleSimpleList = connect(mapStateToProps, mapDispatchToProps)(SimpleList);
+const VisibleSimpleList = connect(mapStateToProps, mapDispatchToProps)(SimpleList,);
 
 export default VisibleSimpleList;

@@ -16,12 +16,23 @@ class SimpleList extends React.Component {
   renderItem(item, index) {
     const { onRemoveItem } = this.props;
 
-    return <SimpleListItem onRemoveItem={onRemoveItem} index={index} item={item} styles={styles} />;
+    return (
+      <SimpleListItem
+        onRemoveItem={onRemoveItem}
+        index={index}
+        item={item}
+        styles={styles}
+      />
+    );
   }
 
   render() {
     const {
-      items, newItem, onAddItemClick, onChangeText, onClearItemsClick,
+      items,
+      newItem,
+      onAddItemClick,
+      onChangeText,
+      onClearItemsClick,
     } = this.props;
 
     return (
@@ -49,7 +60,11 @@ class SimpleList extends React.Component {
           keyExtractor={itemKeyExtractor}
           extraData={this.state}
         />
-        <Button title="Clear Items" onPress={() => onClearItemsClick()} color="purple" />
+        <Button
+          title="Clear Items"
+          onPress={() => onClearItemsClick()}
+          color="purple"
+        />
       </View>
     );
   }

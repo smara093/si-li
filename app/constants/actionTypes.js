@@ -1,6 +1,7 @@
 const types = {
   UPDATE_TEXT: 'UPDATE_TEXT',
   LIST_UPDATED: 'LIST_UPDATED',
+  LOGIN_UPDATE_USERNAME: 'LOGIN_UPDATE_USERNAME',
 };
 
 export default types;
