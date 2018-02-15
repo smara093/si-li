@@ -3,5 +3,5 @@
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "eslint.autoFixOnSave": true,
-  "prettier.eslintIntegration": false
+  "prettier.eslintIntegration": true
 }

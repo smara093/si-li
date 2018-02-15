@@ -1,17 +1,15 @@
-import { connect } from 'react-redux';
-import * as listsActions from '../actions/listsActions';
-import Lists from '../components/Lists';
+import React from 'react';
 
-const mapStateToProps = state => ({
-  lists: state.lists,
-});
+import VisibleLists from '../containers/VisibleLists';
 
-const mapDispatchToProps = dispatch => ({
-  onSelectList: () => {
-    dispatch(listsActions.selectList());
-  },
-});
+class ListsScreen extends React.PureComponent {
+  static navigationOptions = {
+    title: 'my lists',
+  };
 
-const ListsScreen = connect(mapStateToProps, mapDispatchToProps)(Lists);
+  render() {
+    return <VisibleLists />;
+  }
+}
 
 export default ListsScreen;

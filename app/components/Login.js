@@ -1,14 +1,17 @@
 import React from 'react';
 import { Button, TextInput, View } from 'react-native';
 import { PropTypes } from 'prop-types';
+import styles from '../components/styles/SimpleListStyles';
+import Title from '../components/Title';
 
 class Login extends React.PureComponent {
   static navigationOptions = {
     title: 'sign in',
   };
 
+  // TODO: if user is already authenticated, navigate to my lists
+
   authenticate(userName) {
-    console.log(`authenticating ${userName}`);
     const { navigation, authenticate } = this.props;
     authenticate(userName);
     navigation.navigate('Lists');
@@ -16,9 +19,9 @@ class Login extends React.PureComponent {
 
   render() {
     const { updateUserName, userName } = this.props;
-
     return (
       <View>
+        <Title styles={styles} text="a simple list" />
         <TextInput
           placeholder="your name"
           value={userName}

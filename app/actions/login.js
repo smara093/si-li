@@ -1,17 +1,19 @@
-/* eslint import/prefer-default-export: "off", no-unused-vars: "off" */
-
 import types from '../constants/actionTypes';
+import * as firebaseDataStore from '../core/persistence/firebase';
 
-// import * as firebaseDataStore from '../core/persistence/firebase';
-
-export function authenticate(user) {
+export function authenticate(userName) {
   return (dispatch) => {
-    console.log(user);
-    // something authenticate the user and do what needs to be done
+    // go initialize the data for the authenticated user (async)
+    // first, let the app know that data is loading (maybe show a spinner??)
+    dispatch({ type: types.LOGIN_AUTHENTICATED, data: userName });
+
+    return firebaseDataStore
+      .loadLists(userName)
+      .then(response => response, error => console.log('error', error))
+      .then(response => dispatch({ type: types.LISTS_LOADED, data: response }));
   };
 }
 
 export function updateUserName(text) {
-  console.log(`updating ${text}`);
   return { type: types.LOGIN_UPDATE_USERNAME, data: text };
 }

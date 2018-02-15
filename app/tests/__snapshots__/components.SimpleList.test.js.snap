@@ -9,22 +9,6 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#ef7de7",
-        "fontSize": 20,
-        "marginBottom": 5,
-        "padding": 15,
-      }
-    }
-  >
-    a simple list
-  </Text>
   <View
     style={
       Object {

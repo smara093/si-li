@@ -4,11 +4,12 @@ import { Provider } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import firebase from 'firebase';
 
-import { store } from './config/storeConfig';
+import store from './config/storeConfig';
 import ActiveListScreen from './screens/active-list';
 import ListsScreen from './screens/lists';
 import LoginScreen from './screens/login';
 import config from './core/persistence/firebase-config';
+import screens from './constants/screens';
 
 firebase.initializeApp(config);
 
@@ -25,7 +26,7 @@ const RootStack = StackNavigator(
     },
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: screens.Login,
   },
 );
 

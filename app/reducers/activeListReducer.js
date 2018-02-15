@@ -8,7 +8,7 @@ const initialState = {
   newItem: '',
 };
 
-const simpleListReducer = (state = initialState, action) => {
+const activeListReducer = (state = initialState, action) => {
   const { type, data } = action;
   switch (type) {
     case types.UPDATE_TEXT: {
@@ -24,12 +24,17 @@ const simpleListReducer = (state = initialState, action) => {
         newItem: '',
       };
     }
-    default: {
+    case types.LIST_SELECTED: {
+      console.log('selected list', data);
       return {
         ...state,
+        activeList: Object.assign({}, data),
       };
+    }
+    default: {
+      return state;
     }
   }
 };
 
-export default simpleListReducer;
+export default activeListReducer;

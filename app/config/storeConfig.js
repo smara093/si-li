@@ -1,17 +1,16 @@
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import simpleListReducer from '../reducers/simpleListReducer';
+import listsReducer from '../reducers/listsReducer';
+import loginReducer from '../reducers/loginReducer';
+import activeListReducer from '../reducers/activeListReducer';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
+const rootReducer = combineReducers({
+  activeList: activeListReducer,
+  lists: listsReducer,
+  login: loginReducer,
+});
 
-// const rootReducer = combineReducers(simpleListReducer);
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
-// const persistedReducer = persistReducer(persistConfig, simpleListReducer);
-export const store = createStore(simpleListReducer, applyMiddleware(thunkMiddleware));
-// export const persistor = persistStore(store);
+export default store;

@@ -32,4 +32,45 @@ function removeItem(item) {
   ref.remove();
 }
 
-export { initData, saveItemToList, updateItem, removeItem, clearList };
+async function loadLists(user) {
+  return firebase
+    .database()
+    .ref(`users/${user}/lists`)
+    .once('value')
+    .then((snapshot) => {
+      const lists = snapshot.val();
+      return Object.keys(lists || {}).map(key => ({
+        ...lists[key],
+        id: key,
+        text: lists[key].name,
+        isActive: true,
+      }));
+    });
+}
+
+async function addList(list, owner) {
+  const ownerId = owner.id;
+
+  return firebase
+    .database()
+    .ref(`users/${ownerId}/`)
+    .once('value')
+    .then(snapshot => (snapshot && snapshot.val()) || null)
+    .then((user) => {
+      if (user) {
+        return firebase
+          .database()
+          .ref(`users/${ownerId}/lists`)
+          .push()
+          .set(list);
+      }
+
+      return firebase
+        .database()
+        .ref(`users/${ownerId}`)
+        .set({ lists: [list] });
+    })
+    .then(() => loadLists(ownerId));
+}
+
+export { initData, saveItemToList, updateItem, removeItem, clearList, loadLists, addList };

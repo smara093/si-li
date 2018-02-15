@@ -12,6 +12,7 @@ export function saveItemToList(item) {
   };
 }
 
+// TODO: data should be initialized when user selects a list
 export function initData() {
   return (dispatch) => {
     firebaseDataStore.initData(dispatch);
@@ -21,7 +22,7 @@ export function initData() {
 export function removeItemFromList(item) {
   return () => {
     if (item.isActive === true) {
-      firebaseDataStore.updateItem(Object.assign({}, item, { isActive: false, lastModified: Date.now() }));
+      firebaseDataStore.updateItem(Object.assign({}, item, { isActive: false, lastModified: Date.now() }),);
     } else {
       firebaseDataStore.removeItem(item);
     }

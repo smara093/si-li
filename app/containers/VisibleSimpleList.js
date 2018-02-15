@@ -3,8 +3,8 @@ import * as simpleListActions from '../actions/simpleListActions';
 import SimpleList from '../components/SimpleList';
 
 const mapStateToProps = state => ({
-  items: state.items,
-  newItem: state.newItem,
+  items: state.activeList.items,
+  newItem: state.activeList.newItem,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,6 +32,6 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const VisibleSimpleList = connect(mapStateToProps, mapDispatchToProps)(SimpleList,);
+const VisibleSimpleList = connect(mapStateToProps, mapDispatchToProps)(SimpleList);
 
 export default VisibleSimpleList;
