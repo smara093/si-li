@@ -29,8 +29,10 @@ class SimpleList extends React.Component {
 
   render() {
     const {
-      items, newItem, onAddItemClick, onChangeText, onClearItemsClick, owner,
+      newItem, onAddItemClick, onChangeText, onClearItemsClick, list, screen,
     } = this.props;
+
+    console.log(`rendering list for screen ${screen}`, list);
 
     return (
       <View style={styles.container}>
@@ -38,28 +40,28 @@ class SimpleList extends React.Component {
           <TextInput
             placeholder="type to add a new item"
             value={newItem}
-            onSubmitEditing={() => onAddItemClick(newItem)}
+            onSubmitEditing={() => onAddItemClick(newItem, list)}
             onChangeText={text => onChangeText(text)}
             style={{ flex: 1 }}
             underlineColorAndroid="transparent"
           />
           <Button
             title="Add"
-            onPress={() => onAddItemClick(newItem, owner)}
+            onPress={() => onAddItemClick(newItem, list)}
             color="purple"
             style={{ flex: 1 }}
           />
         </View>
-        {items &&
-          items.length > 0 && (
+        {list.items &&
+          list.items.length > 0 && (
             <View>
               <FlatList
-                data={items}
+                data={list.items}
                 renderItem={({ item, index }) => this.renderItem(item, index)}
                 keyExtractor={itemKeyExtractor}
                 extraData={this.state}
               />
-              <Button title="Clear Items" onPress={() => onClearItemsClick()} color="purple" />
+              <Button title="Clear Items" onPress={() => onClearItemsClick(list)} color="purple" />
             </View>
           )}
       </View>
@@ -69,19 +71,18 @@ class SimpleList extends React.Component {
 
 SimpleList.propTypes = {
   newItem: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired,
   onAddItemClick: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
   onClearItemsClick: PropTypes.func.isRequired,
   onRemoveItem: PropTypes.func.isRequired,
   onComponentInit: PropTypes.func.isRequired,
   onSelectItem: PropTypes.func,
-  owner: PropTypes.object,
+  list: PropTypes.object.isRequired,
+  screen: PropTypes.string.isRequired,
 };
 
 SimpleList.defaultProps = {
   onSelectItem: () => {},
-  owner: null,
 };
 
 export default SimpleList;

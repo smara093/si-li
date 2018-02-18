@@ -3,19 +3,20 @@ import * as simpleListActions from '../actions/simpleListActions';
 import SimpleList from '../components/SimpleList';
 
 const mapStateToProps = state => ({
-  items: state.activeList.items,
   newItem: state.activeList.newItem,
+  list: state.activeList,
+  screen: 'myVisibleSimpleList',
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAddItemClick: (newItem) => {
+  onAddItemClick: (newItem, list) => {
     if (newItem) {
       const listItem = {
         text: newItem,
         lastModified: Date.now(),
         isActive: true,
       };
-      dispatch(simpleListActions.saveItemToList(listItem));
+      dispatch(simpleListActions.saveItemToList(listItem, list));
     }
   },
   onRemoveItem: (item) => {
@@ -24,12 +25,10 @@ const mapDispatchToProps = dispatch => ({
   onChangeText: (text) => {
     dispatch(simpleListActions.updateText(text));
   },
-  onClearItemsClick: () => {
-    dispatch(simpleListActions.clearList());
+  onClearItemsClick: (list) => {
+    dispatch(simpleListActions.clearList(list));
   },
-  onComponentInit: () => {
-    dispatch(simpleListActions.initData());
-  },
+  onComponentInit: () => {},
 });
 
 const VisibleSimpleList = connect(mapStateToProps, mapDispatchToProps)(SimpleList);

@@ -1,76 +1,108 @@
 import firebase from 'firebase';
 
-function initData(dispatch) {
-  const listsRef = firebase.database().ref('lists/');
+// List items
+async function addItemToList(item, list) {
+  console.log('saving item', item);
+  console.log('to list', list);
+  const userId = list.userId;
+  const listId = list.id;
 
-  listsRef.on('value', (data) => {
-    const listsObject = data.val();
-    const l = Object.keys(listsObject || {}).map(key => ({ ...listsObject[key], id: key }));
-    dispatch({ type: 'LIST_UPDATED', data: l });
-  });
+  // assuming list exists, throw error if it does not
+  return firebase
+    .database()
+    .ref(`users/${userId}/lists/${listId}/items/`)
+    .push()
+    .set(item);
 }
 
-function saveItemToList(item) {
-  const ref = firebase.database().ref('lists/');
-
-  ref.push().set(item);
+async function updateItem(item) {
+  const ref = firebase.database().ref(`lists/${item.listId}/items`);
+  return ref.set(item);
 }
 
-function updateItem(item) {
-  const ref = firebase.database().ref(`lists/${item.id}`);
-  ref.set(item);
-}
-
-function clearList() {
-  const ref = firebase.database().ref('lists/');
-
-  ref.set({});
-}
-
-function removeItem(item) {
-  const ref = firebase.database().ref(`lists/${item.id}`);
+function removeAllListItems(list) {
+  const ref = firebase.database().ref(`lists/${list.id}/items`);
   ref.remove();
 }
 
-async function loadLists(user) {
-  return firebase
-    .database()
-    .ref(`users/${user}/lists`)
-    .once('value')
-    .then((snapshot) => {
+function removeItem(item) {
+  const ref = firebase.database().ref(`lists/${item.listId}/items/${item.id}`);
+  ref.remove();
+}
+
+// Lists
+async function getLists(userId) {
+  console.log('getting lists for user', userId);
+
+  const ref = firebase.database().ref(`users/${userId}/lists`);
+
+  return ref.once('value').then(
+    (snapshot) => {
       const lists = snapshot.val();
+      console.log('loaded lists: ', lists);
       return Object.keys(lists || {}).map(key => ({
         ...lists[key],
         id: key,
         text: lists[key].name,
         isActive: true,
+        userId,
       }));
+    },
+    (error) => {
+      console.log('getting lists for user failed', error);
+    },
+  );
+}
+
+async function addList(list, userId) {
+  // assume user exists, throw error if it doesn't
+  return firebase
+    .database()
+    .ref(`users/${userId}/lists`)
+    .push()
+    .set(list)
+    .then(() => getLists(userId));
+}
+
+async function getList(userId, listId) {
+  return firebase
+    .database()
+    .ref(`users/${userId}/lists/${listId}/`)
+    .once('value')
+    .then(snapshot => snapshot.val())
+    .then((value) => {
+      console.log('retrieved list', listId);
+
+      return {
+        ...value,
+        id: listId,
+        userId,
+        text: value.name,
+        items: Object.keys(value.items || {}).map(key =>
+          Object.assign(value.items[key], {
+            id: key,
+            listId,
+            userId,
+          })),
+      };
     });
 }
 
-async function addList(list, owner) {
-  const ownerId = owner.id;
-
+// Users
+async function addUser(user) {
   return firebase
     .database()
-    .ref(`users/${ownerId}/`)
-    .once('value')
-    .then(snapshot => (snapshot && snapshot.val()) || null)
-    .then((user) => {
-      if (user) {
-        return firebase
-          .database()
-          .ref(`users/${ownerId}/lists`)
-          .push()
-          .set(list);
-      }
-
-      return firebase
-        .database()
-        .ref(`users/${ownerId}`)
-        .set({ lists: [list] });
-    })
-    .then(() => loadLists(ownerId));
+    .ref(`users/${user.id}/`)
+    .set(user);
 }
 
-export { initData, saveItemToList, updateItem, removeItem, clearList, loadLists, addList };
+export {
+  addItemToList,
+  updateItem,
+  removeItem,
+  removeAllListItems,
+  getLists,
+  addList,
+  addUser,
+  getList,
+};

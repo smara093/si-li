@@ -4,16 +4,16 @@ import * as listsActions from '../actions/listsActions';
 import SimpleList from '../components/SimpleList';
 
 const mapStateToProps = state => ({
-  items: state.lists.ownLists,
   newItem: state.lists.newList,
-  owner: { id: state.login.currentUser },
+  list: { id: state.login.currentUser, items: state.lists.ownLists },
+  screen: 'myVisibleLists',
 });
 
 const mapDispatchToProps = dispatch => ({
   onSelectItem: (list) => {
     dispatch(listsActions.selectList(list));
   },
-  onAddItemClick: (newItem, owner) => {
+  onAddItemClick: (newItem, list) => {
     if (newItem !== '') {
       dispatch(listsActions.addList(
         {
@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
           lastModified: Date.now(),
           items: null,
         },
-        owner,
+        list,
       ));
     }
   },

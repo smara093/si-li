@@ -3,13 +3,17 @@ import { getOrderedItems } from '../core/utilities/SimpleListUtilities';
 
 const initialState = {
   listName: '',
-  owner: '',
+  userId: '',
   items: [],
   newItem: '',
+  id: '',
 };
 
 const activeListReducer = (state = initialState, action) => {
   const { type, data } = action;
+
+  console.log('reducing activeList for action ', type);
+
   switch (type) {
     case types.UPDATE_TEXT: {
       return {
@@ -20,15 +24,18 @@ const activeListReducer = (state = initialState, action) => {
     case types.LIST_UPDATED: {
       return {
         ...state,
-        items: getOrderedItems(data),
+        items: getOrderedItems(data.items),
         newItem: '',
       };
     }
-    case types.LIST_SELECTED: {
-      console.log('selected list', data);
+    case types.LISTS_SELECTED: {
       return {
         ...state,
-        activeList: Object.assign({}, data),
+        items: data.items || [],
+        id: data.id,
+        userId: data.userId,
+        newItem: '',
+        listName: data.name,
       };
     }
     default: {

@@ -10,7 +10,6 @@ class Login extends React.PureComponent {
   };
 
   // TODO: if user is already authenticated, navigate to my lists
-
   authenticate(userName) {
     const { navigation, authenticate } = this.props;
     authenticate(userName);

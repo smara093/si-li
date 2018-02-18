@@ -2,12 +2,14 @@ import types from '../constants/actionTypes';
 
 const initialState = {
   ownLists: [],
-  activeList: null,
   newList: '',
 };
 
 const listsReducer = (state = initialState, action) => {
   const { type, data } = action;
+
+  console.log('reducing lists for action ', type);
+
   switch (type) {
     case types.LISTS_LOADED: {
       return {

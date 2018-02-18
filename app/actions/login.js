@@ -8,7 +8,7 @@ export function authenticate(userName) {
     dispatch({ type: types.LOGIN_AUTHENTICATED, data: userName });
 
     return firebaseDataStore
-      .loadLists(userName)
+      .getLists(userName)
       .then(response => response, error => console.log('error', error))
       .then(response => dispatch({ type: types.LISTS_LOADED, data: response }));
   };
