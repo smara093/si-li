@@ -8,13 +8,8 @@ import SimpleListItem from './SimpleListItem';
 const itemKeyExtractor = item => item.id;
 
 class SimpleList extends React.Component {
-  // move this on select list action
-  componentWillMount() {
-    this.props.onComponentInit();
-  }
-
   renderItem(item, index) {
-    const { onRemoveItem, onSelectItem } = this.props;
+    const { onRemoveItem, onSelectItem, navigation } = this.props;
 
     return (
       <SimpleListItem
@@ -23,16 +18,15 @@ class SimpleList extends React.Component {
         item={item}
         styles={styles}
         onSelectItem={onSelectItem}
+        navigation={navigation}
       />
     );
   }
 
   render() {
     const {
-      newItem, onAddItemClick, onChangeText, onClearItemsClick, list, screen,
+      newItem, onAddItemClick, onChangeText, onClearItemsClick, list,
     } = this.props;
-
-    console.log(`rendering list for screen ${screen}`, list);
 
     return (
       <View style={styles.container}>
@@ -75,14 +69,14 @@ SimpleList.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   onClearItemsClick: PropTypes.func.isRequired,
   onRemoveItem: PropTypes.func.isRequired,
-  onComponentInit: PropTypes.func.isRequired,
   onSelectItem: PropTypes.func,
   list: PropTypes.object.isRequired,
-  screen: PropTypes.string.isRequired,
+  navigation: PropTypes.object,
 };
 
 SimpleList.defaultProps = {
-  onSelectItem: () => {},
+  onSelectItem: null,
+  navigation: {},
 };
 
 export default SimpleList;

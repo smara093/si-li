@@ -9,8 +9,10 @@ export function authenticate(userName) {
 
     return firebaseDataStore
       .getLists(userName)
-      .then(response => response, error => console.log('error', error))
-      .then(response => dispatch({ type: types.LISTS_LOADED, data: response }));
+      .then(
+        response => dispatch({ type: types.LISTS_LOADED, data: response }),
+        error => console.log('error', error),
+      );
   };
 }
 

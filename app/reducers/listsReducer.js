@@ -7,9 +7,6 @@ const initialState = {
 
 const listsReducer = (state = initialState, action) => {
   const { type, data } = action;
-
-  console.log('reducing lists for action ', type);
-
   switch (type) {
     case types.LISTS_LOADED: {
       return {
@@ -22,6 +19,15 @@ const listsReducer = (state = initialState, action) => {
       return {
         ...state,
         newList: data,
+      };
+    }
+    case types.LIST_UPDATED: {
+      return {
+        ...state,
+        ownLists: state.ownLists.map((l) => {
+          if (l.id === data.id) return { ...data, isActive: true };
+          return { ...l };
+        }),
       };
     }
     default: {

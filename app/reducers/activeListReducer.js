@@ -12,8 +12,6 @@ const initialState = {
 const activeListReducer = (state = initialState, action) => {
   const { type, data } = action;
 
-  console.log('reducing activeList for action ', type);
-
   switch (type) {
     case types.UPDATE_TEXT: {
       return {
@@ -31,7 +29,7 @@ const activeListReducer = (state = initialState, action) => {
     case types.LISTS_SELECTED: {
       return {
         ...state,
-        items: data.items || [],
+        items: getOrderedItems(data.items || []),
         id: data.id,
         userId: data.userId,
         newItem: '',

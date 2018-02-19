@@ -28,7 +28,6 @@ const mapDispatchToProps = dispatch => ({
   onClearItemsClick: (list) => {
     dispatch(simpleListActions.clearList(list));
   },
-  onComponentInit: () => {},
 });
 
 const VisibleSimpleList = connect(mapStateToProps, mapDispatchToProps)(SimpleList);

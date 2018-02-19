@@ -5,8 +5,6 @@ import types from '../constants/actionTypes';
 // TODO: rename actions to something consistent
 
 export function selectList(list) {
-  console.log('selected list: ', list);
-
   return {
     type: types.LISTS_SELECTED,
     data: list,
@@ -19,7 +17,7 @@ export function addList(list, owner) {
       .addList(list, owner.id)
       .then(
         response => dispatch({ type: types.LISTS_LOADED, data: response }),
-        error => console.log('error', error),
+        error => console.warn('Add list failed.', error),
       );
 }
 
@@ -28,4 +26,12 @@ export function textUpdated(text) {
     type: types.LISTS_TEXT_UPDATED,
     data: text,
   };
+}
+
+export function removeList(list) {
+  return dispatch =>
+    firebaseDataStore
+      .removeList(list)
+      .then(() => firebaseDataStore.getLists(list.userId))
+      .then(response => dispatch({ type: types.LISTS_LOADED, data: response }));
 }

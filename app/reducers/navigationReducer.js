@@ -24,9 +24,6 @@ const navigationReducer = (state = initialState, action) => {
       break;
   }
 
-  console.log('reducing nav for action ', type);
-  console.log('and returning state ', nextState);
-
   return nextState || state;
 };
 

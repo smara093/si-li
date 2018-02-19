@@ -4,16 +4,16 @@ import thunkMiddleware from 'redux-thunk';
 import listsReducer from '../reducers/listsReducer';
 import loginReducer from '../reducers/loginReducer';
 import activeListReducer from '../reducers/activeListReducer';
-import navigationReducer from '../reducers/navigationReducer';
-import { navigationMiddleware } from '../navigators/AppNavigator';
+// import navigationReducer from '../reducers/navigationReducer';
+// import { navigationMiddleware } from '../navigators/AppNavigator';
 
 const rootReducer = combineReducers({
   activeList: activeListReducer,
   lists: listsReducer,
   login: loginReducer,
-  navigation: navigationReducer,
+  // navigation: navigationReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, navigationMiddleware));
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export default store;
