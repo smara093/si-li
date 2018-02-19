@@ -12,7 +12,6 @@ let onAddItemSpy;
 let onChangeTextSpy;
 let onClearItemsClickSpy;
 let onRemoveItemSpy;
-let onComponentInitSpy;
 
 beforeEach(() => {
   list = {
@@ -29,7 +28,6 @@ beforeEach(() => {
   onChangeTextSpy = jest.fn();
   onClearItemsClickSpy = jest.fn();
   onRemoveItemSpy = jest.fn();
-  onComponentInitSpy = jest.fn();
 });
 
 test('renders correctly', () => {
@@ -41,7 +39,6 @@ test('renders correctly', () => {
       onChangeText={onChangeTextSpy}
       onClearItemsClick={onClearItemsClickSpy}
       onRemoveItem={onRemoveItemSpy}
-      onComponentInit={onComponentInitSpy}
     />)
     .toJSON();
 
@@ -56,7 +53,6 @@ test('add item function is called when adding an item', () => {
     onChangeText={onChangeTextSpy}
     onClearItemsClick={onClearItemsClickSpy}
     onRemoveItem={onRemoveItemSpy}
-    onComponentInit={onComponentInitSpy}
   />);
 
   wrapper.find('Button[title="Add"]').simulate('press');
@@ -73,7 +69,6 @@ test('clear items function is called when pressing the button', () => {
     onChangeText={onChangeTextSpy}
     onClearItemsClick={onClearItemsClickSpy}
     onRemoveItem={onRemoveItemSpy}
-    onComponentInit={onComponentInitSpy}
   />);
 
   wrapper.find('Button[title="Clear Items"]').simulate('press');
@@ -89,7 +84,6 @@ test('the change text function is called when updating the new item text', () =>
     onChangeText={onChangeTextSpy}
     onClearItemsClick={onClearItemsClickSpy}
     onRemoveItem={onRemoveItemSpy}
-    onComponentInit={onComponentInitSpy}
   />);
 
   wrapper.find('TextInput').simulate('changeText', 'new text');
@@ -106,25 +100,10 @@ test('the new item is added on submit', () => {
     onChangeText={onChangeTextSpy}
     onClearItemsClick={onClearItemsClickSpy}
     onRemoveItem={onRemoveItemSpy}
-    onComponentInit={onComponentInitSpy}
   />);
 
   wrapper.find('TextInput').simulate('submitEditing');
 
   expect(onAddItemSpy.mock.calls).toHaveLength(1);
   expect(onAddItemSpy.mock.calls[0][0]).toBe('a very new item');
-});
-
-test('data is initialized on load', () => {
-  shallow(<SimpleList
-    items={list}
-    newItem="a very new item"
-    onAddItemClick={onAddItemSpy}
-    onChangeText={onChangeTextSpy}
-    onClearItemsClick={onClearItemsClickSpy}
-    onRemoveItem={onRemoveItemSpy}
-    onComponentInit={onComponentInitSpy}
-  />);
-
-  expect(onComponentInitSpy.mock.calls).toHaveLength(1);
 });

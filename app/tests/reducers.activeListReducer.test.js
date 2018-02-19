@@ -1,4 +1,4 @@
-import simpleListReducer from '../reducers/simpleListReducer';
+import simpleListReducer from '../reducers/activeListReducer';
 import types from '../constants/actionTypes';
 
 test('items are displayed in the correct order, group by active status, order by active status asc, date desc', () => {
@@ -35,7 +35,7 @@ test('items are displayed in the correct order, group by active status, order by
     },
   ];
 
-  const action = { type: types.LIST_UPDATED, data: items };
+  const action = { type: types.LIST_UPDATED, data: { items } };
   const result = simpleListReducer(undefined, action);
 
   expect(result.items).toHaveLength(5);
