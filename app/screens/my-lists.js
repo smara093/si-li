@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
-import * as listsActions from '../actions/listsActions';
+import * as myListsActions from '../actions/myListsActions';
 import screens from '../constants/screens';
 import SimpleList from '../components/SimpleList';
 
@@ -10,6 +10,7 @@ class ListsScreen extends React.Component {
   static navigationOptions = {
     title: 'my lists',
     headerLeft: null,
+    // TODO: add Logout button
   };
 
   render() {
@@ -50,13 +51,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onSelectItem: (list, navigation) => {
-    dispatch(listsActions.selectList(list));
+    dispatch(myListsActions.selectList(list));
     if (navigation) navigation.navigate(screens.ActiveList);
     else console.warn('navigation is not defined');
   },
   onAddItemClick: (newItem, list) => {
     if (newItem !== '') {
-      dispatch(listsActions.addList(
+      dispatch(myListsActions.addList(
         {
           name: newItem,
           lastModified: Date.now(),
@@ -67,10 +68,10 @@ const mapDispatchToProps = dispatch => ({
     }
   },
   onRemoveItem: (list) => {
-    dispatch(listsActions.removeList(list));
+    dispatch(myListsActions.removeList(list));
   },
   onChangeText: (text) => {
-    dispatch(listsActions.textUpdated(text));
+    dispatch(myListsActions.textUpdated(text));
   },
   onClearItemsClick: () => {
     // this should be configurable, optional and the button not displayed

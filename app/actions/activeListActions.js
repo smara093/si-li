@@ -25,7 +25,6 @@ export function removeItemFromList(item) {
     } else {
       firebaseDataStore
         .removeItem(item)
-        .then(() => dispatch({ type: types.LIST_ITEM_CHANGED }))
         .then(() => firebaseDataStore.getList(item.userId, item.listId))
         .then(list => dispatch({ type: types.LIST_UPDATED, data: list }));
     }

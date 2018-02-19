@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation';
 
 import ActiveListScreen from '../screens/active-list';
-import ListsScreen from '../screens/lists';
+import ListsScreen from '../screens/my-lists';
 import LoginScreen from '../screens/login';
 import screens from '../constants/screens';
 

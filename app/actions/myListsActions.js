@@ -2,7 +2,6 @@
 import * as firebaseDataStore from '../core/persistence/firebase';
 
 import types from '../constants/actionTypes';
-// TODO: rename actions to something consistent
 
 export function selectList(list) {
   return {

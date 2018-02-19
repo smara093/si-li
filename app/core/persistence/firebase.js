@@ -87,7 +87,6 @@ async function getList(userId, listId) {
 }
 
 async function removeList(list) {
-  console.log('removing list', list);
   return firebase
     .database()
     .ref(`users/${list.userId}/lists/${list.id}/`)
