@@ -8,7 +8,7 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.LOGIN_UPDATE_USERNAME: {
+    case types.LOGIN_USERNAME_UPDATED: {
       return {
         ...state,
         userName: action.data,

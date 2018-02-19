@@ -15,7 +15,7 @@ const listsReducer = (state = initialState, action) => {
         newList: '',
       };
     }
-    case types.LISTS_TEXT_UPDATED: {
+    case types.LISTS_UPDATED_TEXT: {
       return {
         ...state,
         newList: data,

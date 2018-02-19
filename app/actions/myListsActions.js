@@ -5,7 +5,7 @@ import types from '../constants/actionTypes';
 
 export function selectList(list) {
   return {
-    type: types.LISTS_SELECTED,
+    type: types.LISTS_SELECTED_LIST,
     data: list,
   };
 }
@@ -22,7 +22,7 @@ export function addList(list, owner) {
 
 export function textUpdated(text) {
   return {
-    type: types.LISTS_TEXT_UPDATED,
+    type: types.LISTS_UPDATED_TEXT,
     data: text,
   };
 }

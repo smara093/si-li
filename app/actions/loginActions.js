@@ -17,5 +17,5 @@ export function authenticate(userName) {
 }
 
 export function updateUserName(text) {
-  return { type: types.LOGIN_UPDATE_USERNAME, data: text };
+  return { type: types.LOGIN_USERNAME_UPDATED, data: text };
 }

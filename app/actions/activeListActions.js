@@ -3,7 +3,7 @@ import * as firebaseDataStore from '../core/persistence/firebase';
 
 // TODO: move this to own component actions, should be reusable on its own.
 export function updateText(text) {
-  return { type: types.UPDATE_TEXT, data: text };
+  return { type: types.LIST_UPDATED_TEXT, data: text };
 }
 
 export function saveItemToList(item, list) {

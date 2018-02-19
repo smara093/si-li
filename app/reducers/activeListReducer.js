@@ -13,7 +13,7 @@ const activeListReducer = (state = initialState, action) => {
   const { type, data } = action;
 
   switch (type) {
-    case types.UPDATE_TEXT: {
+    case types.LIST_UPDATED_TEXT: {
       return {
         ...state,
         newItem: data,
@@ -26,7 +26,7 @@ const activeListReducer = (state = initialState, action) => {
         newItem: '',
       };
     }
-    case types.LISTS_SELECTED: {
+    case types.LISTS_SELECTED_LIST: {
       return {
         ...state,
         items: getOrderedItems(data.items || []),
