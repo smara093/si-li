@@ -1,14 +1,14 @@
 import types from '../constants/actionTypes';
 
 const initialState = {
-  userName: 'Smara',
+  userName: '',
   isAuthenticated: false,
   currentUser: '',
 };
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.LOGIN_USERNAME_UPDATED: {
+    case types.LOGIN_UPDATED_USERNAME: {
       return {
         ...state,
         userName: action.data,

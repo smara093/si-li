@@ -6,7 +6,7 @@
     "slug": "simple-list",
     "privacy": "public",
     "sdkVersion": "25.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": ["android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,8 +16,8 @@
       "resizeMode": "contain",
       "backgroundColor": "#ef7de7"
     },
-    "ios": {
-      "supportsTablet": true
+    "android": {
+      "package": "com.smaraf.sili"
     }
   }
 }
