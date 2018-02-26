@@ -3,15 +3,17 @@ import { getOrderedItems } from '../core/utilities/SimpleListUtilities';
 
 const initialState = {
   listName: '',
-  owner: '',
+  userId: '',
   items: [],
   newItem: '',
+  id: '',
 };
 
-const simpleListReducer = (state = initialState, action) => {
+const activeListReducer = (state = initialState, action) => {
   const { type, data } = action;
+
   switch (type) {
-    case types.UPDATE_TEXT: {
+    case types.LIST_UPDATED_TEXT: {
       return {
         ...state,
         newItem: data,
@@ -20,16 +22,24 @@ const simpleListReducer = (state = initialState, action) => {
     case types.LIST_UPDATED: {
       return {
         ...state,
-        items: getOrderedItems(data),
+        items: getOrderedItems(data.items),
         newItem: '',
       };
     }
-    default: {
+    case types.LISTS_SELECTED_LIST: {
       return {
         ...state,
+        items: getOrderedItems(data.items || []),
+        id: data.id,
+        userId: data.userId,
+        newItem: '',
+        listName: data.name,
       };
+    }
+    default: {
+      return state;
     }
   }
 };
 
-export default simpleListReducer;
+export default activeListReducer;

@@ -1,21 +1,20 @@
-import React from 'react';
-import { Button } from 'react-native';
-import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import Login from '../components/Login';
+import * as loginActions from '../actions/loginActions';
 
-class Login extends React.PureComponent {
-  static navigationOptions = {
-    title: 'sign in',
-  };
+const mapStateToProps = state => ({
+  userName: state.login.userName,
+});
 
-  render() {
-    return (
-      <Button onPress={() => this.props.navigation.navigate('ActiveList')} title="No thanks" />
-    );
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  authenticate: (userName) => {
+    dispatch(loginActions.authenticate(userName));
+  },
+  updateUserName: (userName) => {
+    dispatch(loginActions.updateUserName(userName));
+  },
+});
 
-Login.propTypes = {
-  navigation: PropTypes.object.isRequired,
-};
+const LoginScreen = connect(mapStateToProps, mapDispatchToProps)(Login);
 
-export default Login;
+export default LoginScreen;
