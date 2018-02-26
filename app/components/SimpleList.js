@@ -55,7 +55,13 @@ class SimpleList extends React.Component {
                 keyExtractor={itemKeyExtractor}
                 extraData={this.state}
               />
-              <Button title="Clear Items" onPress={() => onClearItemsClick(list)} color="purple" />
+              {onClearItemsClick && (
+                <Button
+                  title="Clear Items"
+                  onPress={() => onClearItemsClick(list)}
+                  color="purple"
+                />
+              )}
             </View>
           )}
       </View>
@@ -67,7 +73,7 @@ SimpleList.propTypes = {
   newItem: PropTypes.string.isRequired,
   onAddItemClick: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
-  onClearItemsClick: PropTypes.func.isRequired,
+  onClearItemsClick: PropTypes.func,
   onRemoveItem: PropTypes.func.isRequired,
   onSelectItem: PropTypes.func,
   list: PropTypes.object.isRequired,
@@ -77,6 +83,7 @@ SimpleList.propTypes = {
 SimpleList.defaultProps = {
   onSelectItem: null,
   navigation: {},
+  onClearItemsClick: null,
 };
 
 export default SimpleList;
