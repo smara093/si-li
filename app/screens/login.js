@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Login from '../components/Login';
 import * as loginActions from '../actions/loginActions';
 
@@ -7,12 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  authenticate: (userName) => {
-    dispatch(loginActions.authenticate(userName));
-  },
-  updateUserName: (userName) => {
-    dispatch(loginActions.updateUserName(userName));
-  },
+  actions: bindActionCreators(loginActions, dispatch),
 });
 
 const LoginScreen = connect(mapStateToProps, mapDispatchToProps)(Login);

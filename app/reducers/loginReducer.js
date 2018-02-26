@@ -1,17 +1,19 @@
 import types from '../constants/actionTypes';
 
 const initialState = {
-  userName: '',
   isAuthenticated: false,
   currentUser: '',
 };
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.LOGIN_UPDATED_USERNAME: {
+    case 'LOGIN_USER_REGISTERED':
+    case 'LOGIN_USER_AUTHENTICATED': {
+      console.log('user registered/authenticated', action.data);
       return {
         ...state,
-        userName: action.data,
+        currentUser: action.data,
+        isAuthenticated: true,
       };
     }
     case types.LOGIN_AUTHENTICATED: {
@@ -19,7 +21,6 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         currentUser: action.data,
-        userName: '',
       };
     }
     default: {

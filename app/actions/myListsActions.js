@@ -11,6 +11,7 @@ export function selectList(list) {
 }
 
 export function addList(list, owner) {
+  console.log('adding list to ', owner);
   return dispatch =>
     firebaseDataStore
       .addList(list, owner.id)

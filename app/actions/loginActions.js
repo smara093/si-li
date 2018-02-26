@@ -1,18 +1,24 @@
 import types from '../constants/actionTypes';
 import * as firebaseDataStore from '../core/persistence/firebase';
 
-export function authenticate(userName) {
-  return (dispatch) => {
-    // go initialize the data for the authenticated user (async)
-    // first, let the app know that data is loading (maybe show a spinner??)
-    dispatch({ type: types.LOGIN_AUTHENTICATED, data: userName });
+export function userHasAuthenticated(userInfo) {
+  return async (dispatch) => {
+    dispatch({ type: 'LOGIN_USER_AUTHENTICATED', data: userInfo });
 
-    return firebaseDataStore
-      .getLists(userName)
-      .then(
-        response => dispatch({ type: types.LISTS_LOADED, data: response }),
-        error => console.log('error', error),
-      );
+    try {
+      const lists = await firebaseDataStore.getLists(userInfo.uid);
+
+      dispatch({ type: types.LISTS_LOADED, data: lists });
+    } catch (err) {
+      console.log('An error has ocurred while loading lists');
+    }
+  };
+}
+
+export function userHasRegistered(userInfo) {
+  return (dispatch) => {
+    dispatch({ type: 'LOGIN_USER_REGISTERED', data: userInfo });
+    firebaseDataStore.addUser({ id: userInfo.uid, email: userInfo.email });
   };
 }
 
