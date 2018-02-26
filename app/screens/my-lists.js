@@ -52,8 +52,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onSelectItem: (list, navigation) => {
     dispatch(myListsActions.selectList(list));
-    if (navigation) navigation.navigate(screens.ActiveList);
-    else console.warn('navigation is not defined');
+    if (navigation) {
+      navigation.navigate(screens.ActiveList, { title: list.name });
+    } else {
+      console.warn('navigation is not defined');
+    }
   },
   onAddItemClick: (newItem, list) => {
     if (newItem !== '') {
@@ -72,9 +75,6 @@ const mapDispatchToProps = dispatch => ({
   },
   onChangeText: (text) => {
     dispatch(myListsActions.textUpdated(text));
-  },
-  onClearItemsClick: () => {
-    // this should be configurable, optional and the button not displayed
   },
 });
 
