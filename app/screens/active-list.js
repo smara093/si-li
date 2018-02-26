@@ -6,10 +6,9 @@ import * as activeListActions from '../actions/activeListActions';
 import SimpleList from '../components/SimpleList';
 
 class ActiveList extends React.PureComponent {
-  static navigationOptions = {
-    // TODO: render the list's name
-    title: 'my list',
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: (navigation.state && navigation.state.params.title) || 'my-list',
+  });
 
   render() {
     const {
@@ -41,6 +40,7 @@ ActiveList.propTypes = {
   onClearItemsClick: PropTypes.func.isRequired,
   onRemoveItem: PropTypes.func.isRequired,
   list: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
