@@ -1,7 +1,7 @@
-import firebase from 'firebase';
+/* eslint import/prefer-default-export:0 */
 
 import types from '../constants/actionTypes';
-import * as firebaseDataStore from '../core/persistence/firebase';
+import * as dataStore from '../core/persistence/firebase';
 
 export function registerUserWithEmailAndPassword(email, password, confirmedPassword) {
   return async (dispatch) => {
@@ -16,8 +16,8 @@ export function registerUserWithEmailAndPassword(email, password, confirmedPassw
 
     let registeredUser;
     try {
-      registeredUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      firebaseDataStore.addUser({ id: registeredUser.uid, email: registeredUser.email });
+      registeredUser = await dataStore.createUserWithEmailAndPassword(email, password);
+      dataStore.addUser(registeredUser);
       dispatch({ type: types.REGISTRATION_USER_REGISTERED, data: registeredUser });
     } catch (err) {
       switch (err.code) {
@@ -37,7 +37,7 @@ export function registerUserWithEmailAndPassword(email, password, confirmedPassw
     }
 
     try {
-      const lists = await firebaseDataStore.getLists(registeredUser.uid);
+      const lists = await dataStore.getLists(registeredUser.uid);
       dispatch({ type: types.LISTS_LOADED, data: lists });
     } catch (err) {
       console.log('An error has ocurred while loading lists');
@@ -46,5 +46,3 @@ export function registerUserWithEmailAndPassword(email, password, confirmedPassw
     return true;
   };
 }
-
-export function Useless() {}

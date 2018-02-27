@@ -1,7 +1,5 @@
-import firebase from 'firebase';
-
 import types from '../constants/actionTypes';
-import * as firebaseDataStore from '../core/persistence/firebase';
+import * as dataStore from '../core/persistence/firebase';
 
 export function authenticateUserWithEmailAndPassword(email, password) {
   return async (dispatch) => {
@@ -11,8 +9,12 @@ export function authenticateUserWithEmailAndPassword(email, password) {
 
     let authenticatedUser;
     try {
-      authenticatedUser = await firebase.auth().signInWithEmailAndPassword(email, password);
-      dispatch({ type: types.LOGIN_USER_AUTHENTICATED, data: authenticatedUser });
+      authenticatedUser = await dataStore.signInWithEmailAndPassword(email, password);
+
+      dispatch({
+        type: types.LOGIN_USER_AUTHENTICATED,
+        data: authenticatedUser,
+      });
     } catch (err) {
       switch (err.code) {
         case 'auth/wrong-password':
@@ -25,7 +27,7 @@ export function authenticateUserWithEmailAndPassword(email, password) {
     }
 
     try {
-      const lists = await firebaseDataStore.getLists(authenticatedUser.uid);
+      const lists = await dataStore.getLists(authenticatedUser.id);
       dispatch({ type: types.LISTS_LOADED, data: lists });
     } catch (err) {
       console.log('An error has ocurred while loading lists');
@@ -38,7 +40,7 @@ export function authenticateUserWithEmailAndPassword(email, password) {
 export function userHasRegistered(userInfo) {
   return (dispatch) => {
     dispatch({ type: 'LOGIN_USER_REGISTERED', data: userInfo });
-    firebaseDataStore.addUser({ id: userInfo.uid, email: userInfo.email });
+    dataStore.addUser({ id: userInfo.uid, email: userInfo.email });
   };
 }
 

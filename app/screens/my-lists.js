@@ -46,7 +46,7 @@ ListsScreen.defaultProps = {
 
 const mapStateToProps = state => ({
   newItem: state.lists.newList,
-  list: { id: state.login.currentUser.uid, items: state.lists.ownLists },
+  list: { id: state.login.currentUser.id, items: state.lists.ownLists },
 });
 
 const mapDispatchToProps = dispatch => ({
