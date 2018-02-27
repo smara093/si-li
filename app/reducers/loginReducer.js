@@ -8,8 +8,8 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN_USER_REGISTERED':
-    case 'LOGIN_USER_AUTHENTICATED': {
+    case types.REGISTRATION_USER_REGISTERED:
+    case types.LOGIN_USER_AUTHENTICATED: {
       return {
         ...state,
         currentUser: action.data,
@@ -17,17 +17,10 @@ const loginReducer = (state = initialState, action) => {
         errorMessage: '',
       };
     }
-    case 'LOGIN_ERROR_OCURRED': {
+    case types.LOGIN_ERROR_OCURRED: {
       return {
         ...state,
         errorMessage: action.data,
-      };
-    }
-    case types.LOGIN_AUTHENTICATED: {
-      return {
-        ...state,
-        isAuthenticated: true,
-        currentUser: action.data,
       };
     }
     default: {

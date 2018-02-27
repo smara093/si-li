@@ -6,13 +6,13 @@ import * as firebaseDataStore from '../core/persistence/firebase';
 export function authenticateUserWithEmailAndPassword(email, password) {
   return async (dispatch) => {
     const setError = (message) => {
-      dispatch({ type: 'LOGIN_ERROR_OCURRED', data: message });
+      dispatch({ type: types.LOGIN_ERROR_OCURRED, data: message });
     };
 
     let authenticatedUser;
     try {
       authenticatedUser = await firebase.auth().signInWithEmailAndPassword(email, password);
-      dispatch({ type: 'LOGIN_USER_AUTHENTICATED', data: authenticatedUser });
+      dispatch({ type: types.LOGIN_USER_AUTHENTICATED, data: authenticatedUser });
     } catch (err) {
       switch (err.code) {
         case 'auth/wrong-password':
