@@ -1,49 +1,59 @@
+/* eslint import/prefer-default-export: 0 */
+import Expo from 'expo';
+import firebase from 'firebase';
 import types from '../constants/actionTypes';
 import * as dataStore from '../core/persistence/firebase';
+import User from '../core/models/User';
+import * as configuration from '../config/configuration';
 
-export function authenticateUserWithEmailAndPassword(email, password) {
+export function authenticateWithGoogle() {
   return async (dispatch) => {
-    const setError = (message) => {
-      dispatch({ type: types.LOGIN_ERROR_OCURRED, data: message });
-    };
-
-    let authenticatedUser;
     try {
-      authenticatedUser = await dataStore.signInWithEmailAndPassword(email, password);
-
-      dispatch({
-        type: types.LOGIN_USER_AUTHENTICATED,
-        data: authenticatedUser,
+      const result = await Expo.Google.logInAsync({
+        androidClientId: configuration.androidClientId,
+        androidStandaloneAppClientId: configuration.androidStandaloneAppClientId,
+        scopes: ['profile', 'email'],
+        behavior: 'system',
       });
-    } catch (err) {
-      switch (err.code) {
-        case 'auth/wrong-password':
-          setError('Are you sure your password is correct?');
-          break;
-        default:
-          setError('Something went wrong, please try again');
+
+      if (result.type === 'success') {
+        const googleCredential = firebase.auth.GoogleAuthProvider.credential(
+          result.idToken,
+          result.accessToken,
+        );
+
+        const authenticatedUser = await firebase
+          .auth()
+          .signInWithCredential(googleCredential)
+          .catch((err) => {
+            console.log('error', err);
+          });
+
+        const user = new User(
+          authenticatedUser.uid,
+          authenticatedUser.email,
+          authenticatedUser.displayName,
+        );
+
+        if ((await dataStore.userExists(user)) === false) {
+          dataStore.addUser(user);
+        }
+
+        dispatch({
+          type: types.LOGIN_USER_AUTHENTICATED,
+          data: user,
+        });
+
+        const lists = await dataStore.getLists(user.id);
+
+        dispatch({ type: types.LISTS_LOADED, data: lists });
       }
-      return false;
+
+      // throw exception
+      return { cancelled: true };
+    } catch (e) {
+      // throw exception
+      return { error: true };
     }
-
-    try {
-      const lists = await dataStore.getLists(authenticatedUser.id);
-      dispatch({ type: types.LISTS_LOADED, data: lists });
-    } catch (err) {
-      console.log('An error has ocurred while loading lists');
-    }
-
-    return true;
   };
-}
-
-export function userHasRegistered(userInfo) {
-  return (dispatch) => {
-    dispatch({ type: 'LOGIN_USER_REGISTERED', data: userInfo });
-    dataStore.addUser({ id: userInfo.uid, email: userInfo.email });
-  };
-}
-
-export function updateUserName(text) {
-  return { type: types.LOGIN_UPDATED_USERNAME, data: text };
 }

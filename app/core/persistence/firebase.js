@@ -108,17 +108,14 @@ export async function addUser(user) {
     .set(user);
 }
 
-// Authentication
-export function signInWithEmailAndPassword(email, password) {
+export async function userExists(user) {
   return firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(value => new User(value.uid, value.email));
-}
+    .database()
+    .ref(`users/${user.id}/`)
+    .once('value')
+    .then((snapshot) => {
+      if (snapshot.val()) return true;
 
-export function createUserWithEmailAndPassword(email, password) {
-  return firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(value => new User(value.uid, value.email));
+      return false;
+    });
 }

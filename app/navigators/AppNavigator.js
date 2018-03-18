@@ -3,7 +3,6 @@ import { StackNavigator } from 'react-navigation';
 import ActiveListScreen from '../screens/active-list';
 import ListsScreen from '../screens/my-lists';
 import LoginScreen from '../screens/login';
-import Registration from '../screens/registration';
 import screens from '../constants/screens';
 
 export const RootStack = StackNavigator(
@@ -16,9 +15,6 @@ export const RootStack = StackNavigator(
     },
     Lists: {
       screen: ListsScreen,
-    },
-    Registration: {
-      screen: Registration,
     },
   },
   {

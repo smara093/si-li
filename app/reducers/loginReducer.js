@@ -8,7 +8,6 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.REGISTRATION_USER_REGISTERED:
     case types.LOGIN_USER_AUTHENTICATED: {
       return {
         ...state,

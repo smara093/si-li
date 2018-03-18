@@ -4,3 +4,5 @@ npm-debug.*
 TODO
 /coverage
 yarn-error.log
+app/config/configuration.js
+simple-list.jks

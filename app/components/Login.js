@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Button, Text, View } from 'react-native';
 import { PropTypes } from 'prop-types';
 import styles from '../components/styles/SimpleListStyles';
 import Title from '../components/Title';
+import screens from '../constants/screens';
 
 class Login extends React.PureComponent {
   static navigationOptions = {
@@ -12,55 +13,34 @@ class Login extends React.PureComponent {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
-    errorMessage: PropTypes.string.isRequired,
   };
 
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = {
+      isAuthenticating: false,
+    };
   }
 
   render() {
-    const { errorMessage, navigation, actions } = this.props;
+    const { navigation, actions } = this.props;
 
-    const authenticateUserWithEmailAndPassword = async () => {
-      if (
-        (await actions.authenticateUserWithEmailAndPassword(
-          this.state.email,
-          this.state.password,
-        )) === true
-      ) {
-        navigation.navigate('Lists');
-      }
+    const authenticateWithGoogle = async () => {
+      this.setState({ isAuthenticating: true });
+      await actions.authenticateWithGoogle();
+      navigation.navigate(screens.Lists);
+      this.setState({ isAuthenticating: false });
     };
 
     return (
       <View>
         <Title styles={styles} text="a simple list" />
-        <Text>{errorMessage}</Text>
-        <TextInput
-          placeholder="you@domain.com"
-          value={this.state.email}
-          onChangeText={text => this.setState({ email: text })}
-          underlineColorAndroid="transparent"
-        />
-        <TextInput
-          placeholder="your password"
-          secureTextEntry
-          value={this.state.password}
-          onChangeText={text => this.setState({ password: text })}
-          onSubmitEditing={authenticateUserWithEmailAndPassword}
-          underlineColorAndroid="transparent"
-        />
-
-        <Button onPress={authenticateUserWithEmailAndPassword} title="Log in" />
-
-        <Button
-          onPress={() => {
-            navigation.navigate('Registration', { email: this.state.email });
-          }}
-          title="Register now"
-        />
+        {this.state.isAuthenticating === true && <ActivityIndicator size="small" color="#ef7de7" />}
+        {this.state.isAuthenticating === false && (
+          <Button onPress={authenticateWithGoogle} title="Log in with Google" />
+          // TODO: add proper styling to comply with Google Auth branding requirements
+          // TODO: add option to continue without authentication
+        )}
       </View>
     );
   }
