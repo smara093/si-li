@@ -1,9 +1,11 @@
+import firebase from 'firebase';
 import React from 'react';
-import { ActivityIndicator, Button, Text, View } from 'react-native';
+import { ActivityIndicator, Button, View } from 'react-native';
 import { PropTypes } from 'prop-types';
 import styles from '../components/styles/SimpleListStyles';
 import Title from '../components/Title';
 import screens from '../constants/screens';
+import User from '../core/models/User';
 
 class Login extends React.PureComponent {
   static navigationOptions = {
@@ -20,6 +22,16 @@ class Login extends React.PureComponent {
     this.state = {
       isAuthenticating: false,
     };
+  }
+
+  async componentDidMount() {
+    // TODO: move into an app loading component
+    await firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        await this.props.actions.dispatchUserAuthenticated(new User(user.uid, user.email, user.displayName));
+        this.props.navigation.navigate(screens.Lists);
+      }
+    });
   }
 
   render() {

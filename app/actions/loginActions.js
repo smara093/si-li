@@ -17,36 +17,41 @@ export function authenticateWithGoogle() {
       });
 
       if (result.type === 'success') {
-        const googleCredential = firebase.auth.GoogleAuthProvider.credential(
-          result.idToken,
-          result.accessToken,
-        );
-
-        const authenticatedUser = await firebase
+        firebase
           .auth()
-          .signInWithCredential(googleCredential)
-          .catch((err) => {
-            console.log('error', err);
+          .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+          .then(async () => {
+            const googleCredential = firebase.auth.GoogleAuthProvider.credential(
+              result.idToken,
+              result.accessToken,
+            );
+
+            const authenticatedUser = await firebase
+              .auth()
+              .signInWithCredential(googleCredential)
+              .catch((err) => {
+                console.log('error', err);
+              });
+
+            const user = new User(
+              authenticatedUser.uid,
+              authenticatedUser.email,
+              authenticatedUser.displayName,
+            );
+
+            if ((await dataStore.userExists(user)) === false) {
+              dataStore.addUser(user);
+            }
+
+            dispatch({
+              type: types.LOGIN_USER_AUTHENTICATED,
+              data: user,
+            });
+
+            const lists = await dataStore.getLists(user.id);
+
+            dispatch({ type: types.LISTS_LOADED, data: lists });
           });
-
-        const user = new User(
-          authenticatedUser.uid,
-          authenticatedUser.email,
-          authenticatedUser.displayName,
-        );
-
-        if ((await dataStore.userExists(user)) === false) {
-          dataStore.addUser(user);
-        }
-
-        dispatch({
-          type: types.LOGIN_USER_AUTHENTICATED,
-          data: user,
-        });
-
-        const lists = await dataStore.getLists(user.id);
-
-        dispatch({ type: types.LISTS_LOADED, data: lists });
       }
 
       // throw exception
@@ -55,5 +60,15 @@ export function authenticateWithGoogle() {
       // throw exception
       return { error: true };
     }
+  };
+}
+
+export function dispatchUserAuthenticated(user) {
+  return async (dispatch) => {
+    dispatch({ type: types.LOGIN_USER_AUTHENTICATED, data: user });
+
+    const lists = await dataStore.getLists(user.id);
+
+    dispatch({ type: types.LISTS_LOADED, data: lists });
   };
 }
