@@ -10,8 +10,8 @@ export function authenticateWithGoogle() {
   return async (dispatch) => {
     try {
       const result = await Expo.Google.logInAsync({
-        androidClientId: configuration.androidClientId,
-        androidStandaloneAppClientId: configuration.androidStandaloneAppClientId,
+        androidClientId: configuration.ANDROID_CLIENT_ID,
+        androidStandaloneAppClientId: configuration.ANDROID_STANDALONE_APP_CLIENT_ID,
         scopes: ['profile', 'email'],
         behavior: 'system',
       });

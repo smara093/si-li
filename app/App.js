@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 
 import store from './config/storeConfig';
-import config from './core/persistence/firebase-config';
+import { FIREBASE_CONFIG } from './config/configuration';
 import AppNavigator from './navigators/AppNavigator';
 
-firebase.initializeApp(config);
+firebase.initializeApp(FIREBASE_CONFIG);
 
 const App = () => (
   <Provider store={store}>
