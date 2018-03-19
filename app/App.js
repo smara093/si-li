@@ -5,13 +5,13 @@ import firebase from 'firebase';
 
 import store from './config/storeConfig';
 import { FIREBASE_CONFIG } from './config/configuration';
-import AppNavigator from './navigators/AppNavigator';
+import AppLoadingScreen from './screens/app-loading';
 
 firebase.initializeApp(FIREBASE_CONFIG);
 
 const App = () => (
   <Provider store={store}>
-    <AppNavigator />
+    <AppLoadingScreen />
   </Provider>
 );
 
