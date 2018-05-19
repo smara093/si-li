@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { Alert } from 'react-native';
 
 import * as myListsActions from '../actions/myListsActions';
 import screens from '../constants/screens';
@@ -11,14 +12,7 @@ class ListsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'my lists',
     headerLeft: null,
-    headerRight: (
-      <MenuButton
-        screenName={screens.MyAccount}
-        title="menu"
-        navigation={navigation}
-        // TODO: Add nicer style
-      />
-    ),
+    headerRight: <MenuButton screenName={screens.MyAccount} title="menu" navigation={navigation} />,
   });
 
   render() {
@@ -79,7 +73,12 @@ const mapDispatchToProps = dispatch => ({
     }
   },
   onRemoveItem: (list) => {
-    dispatch(myListsActions.removeList(list));
+    Alert.alert(
+      'Removing list',
+      `Are you sure you want to remove the list ${list.text}?`,
+      [{ text: 'No' }, { text: 'Yes', onPress: () => dispatch(myListsActions.removeList(list)) }],
+      { cancelable: true },
+    );
   },
   onChangeText: (text) => {
     dispatch(myListsActions.textUpdated(text));
