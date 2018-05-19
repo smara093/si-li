@@ -1,27 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
-import { Button } from "react-native";
+import React from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
-import * as activeListActions from "../actions/activeListActions";
-import SimpleList from "../components/SimpleList";
-import screens from "../constants/screens";
+import * as activeListActions from '../actions/activeListActions';
+import SimpleList from '../components/SimpleList';
+import screens from '../constants/screens';
+import MenuButton from '../components/MenuButton';
 
 class ActiveList extends React.PureComponent {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
     return {
-      title: (params && params.title) || "my list",
+      title: (params && params.title) || 'my list',
       headerRight: (
-        // TODO: extract component for the My Account button
-        <Button
-          onPress={() => {
-            navigation.navigate(screens.MyAccount);
-          }}
-          title="My Account"
-          // TODO: Add nicer style
-        />
-      )
+        <MenuButton screenName={screens.MyAccount} title="menu" navigation={navigation} />
+      ),
     };
   };
 
@@ -32,7 +25,7 @@ class ActiveList extends React.PureComponent {
       onAddItemClick,
       onRemoveItem,
       onChangeText,
-      onClearItemsClick
+      onClearItemsClick,
     } = this.props;
 
     return (
@@ -55,12 +48,12 @@ ActiveList.propTypes = {
   onClearItemsClick: PropTypes.func.isRequired,
   onRemoveItem: PropTypes.func.isRequired,
   list: PropTypes.object.isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   newItem: state.activeList.newItem,
-  list: state.activeList
+  list: state.activeList,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -69,20 +62,20 @@ const mapDispatchToProps = dispatch => ({
       const listItem = {
         text: newItem,
         lastModified: Date.now(),
-        isActive: true
+        isActive: true,
       };
       dispatch(activeListActions.saveItemToList(listItem, list));
     }
   },
-  onRemoveItem: item => {
+  onRemoveItem: (item) => {
     dispatch(activeListActions.removeItemFromList(item));
   },
-  onChangeText: text => {
+  onChangeText: (text) => {
     dispatch(activeListActions.updateText(text));
   },
-  onClearItemsClick: list => {
+  onClearItemsClick: (list) => {
     dispatch(activeListActions.clearList(list));
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActiveList);

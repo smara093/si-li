@@ -20,6 +20,17 @@ const styles = StyleSheet.create({
   inactiveRow: {
     backgroundColor: 'gray',
   },
+  menuButton: {
+    backgroundColor: 'purple',
+    borderRadius: 2,
+    margin: 10,
+  },
+  menuText: {
+    textAlign: 'center',
+    fontWeight: '500',
+    padding: 8,
+    color: 'white',
+  },
 });
 
 export default styles;
