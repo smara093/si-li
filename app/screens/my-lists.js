@@ -1,17 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { Button } from 'react-native';
 
 import * as myListsActions from '../actions/myListsActions';
 import screens from '../constants/screens';
 import SimpleList from '../components/SimpleList';
 
 class ListsScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'my lists',
     headerLeft: null,
-    // TODO: add Logout button
-  };
+    headerRight: (
+      <Button
+        onPress={() => {
+          navigation.navigate(screens.MyAccount);
+        }}
+        title="My Account"
+        // TODO: Add nicer style
+      />
+    ),
+  });
 
   render() {
     return (

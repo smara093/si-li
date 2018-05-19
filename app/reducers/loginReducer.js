@@ -22,6 +22,14 @@ const loginReducer = (state = initialState, action) => {
         errorMessage: action.data,
       };
     }
+    case types.ACCOUNT_USER_SIGNED_OUT: {
+      return {
+        ...state,
+        currentUser: null,
+        isAuthenticated: false,
+        errorMessage: '',
+      };
+    }
     default: {
       return state;
     }

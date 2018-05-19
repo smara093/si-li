@@ -1,13 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { Button } from 'react-native';
 
 import * as activeListActions from '../actions/activeListActions';
 import SimpleList from '../components/SimpleList';
+import screens from '../constants/screens';
 
 class ActiveList extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
     title: (navigation.state && navigation.state.params.title) || 'my-list',
+    headerRight: (
+      // TODO: extract component for the My Account button
+      <Button
+        onPress={() => {
+          navigation.navigate(screens.MyAccount);
+        }}
+        title="My Account"
+        // TODO: Add nicer style
+      />
+    ),
   });
 
   render() {

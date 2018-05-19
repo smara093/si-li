@@ -26,6 +26,8 @@ class AppLoadingScreen extends React.Component {
       if (user) {
         this.setState({ isAuthenticated: true });
         this.props.actions.dispatchUserAuthenticated(new User(user.uid, user.email, user.displayName));
+      } else {
+        this.setState({ isAuthenticated: false });
       }
     });
   }
