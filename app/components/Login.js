@@ -30,7 +30,7 @@ class Login extends React.PureComponent {
     };
 
     return (
-      <View>
+      <View style={styles.container}>
         <Title styles={styles} text="a simple list" />
         {this.state.isAuthenticating === true && <ActivityIndicator size="small" color="#ef7de7" />}
         {this.state.isAuthenticating === false && (
