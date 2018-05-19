@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableNativeFeedback, View } from 'react-native';
 
 import styles from './styles/SimpleListStyles';
 
@@ -8,15 +8,16 @@ class MenuButton extends React.PureComponent {
   render() {
     const { navigation, screenName, title } = this.props;
     return (
-      <TouchableOpacity
+      <TouchableNativeFeedback
         onPress={() => {
           navigation.navigate(screenName);
         }}
+        background={TouchableNativeFeedback.Ripple('pink')}
       >
         <View style={styles.menuButton}>
           <Text style={styles.menuText}>{title.toUpperCase()}</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableNativeFeedback>
     );
   }
 }
