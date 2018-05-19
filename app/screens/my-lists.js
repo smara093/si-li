@@ -12,7 +12,15 @@ class ListsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'my lists',
     headerLeft: null,
-    headerRight: <MenuButton screenName={screens.MyAccount} title="menu" navigation={navigation} />,
+    headerRight: (
+      <MenuButton
+        onPress={() => {
+          navigation.navigate(screens.MyAccount);
+        }}
+        title="menu"
+        navigation={navigation}
+      />
+    ),
   });
 
   render() {

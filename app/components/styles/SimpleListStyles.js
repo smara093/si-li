@@ -1,5 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+export const colors = {
+  primary: '#10485E', // e.g. buttons
+  secondary: '#76B59B', // e.g. headers
+  tertiary: '#C5CBD3', // e.g. inactive items, text on primary background
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -7,7 +13,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    backgroundColor: '#ef7de7',
+    backgroundColor: colors.secondary,
     padding: 15,
     marginBottom: 5,
     alignItems: 'center',
@@ -15,21 +21,25 @@ const styles = StyleSheet.create({
   row: {
     padding: 15,
     marginBottom: 5,
-    backgroundColor: '#76B59B',
+    backgroundColor: colors.secondary,
   },
   inactiveRow: {
-    backgroundColor: 'gray',
+    backgroundColor: colors.tertiary,
   },
   menuButton: {
-    backgroundColor: 'purple',
+    backgroundColor: 'transparent',
     borderRadius: 2,
-    margin: 10,
+    padding: 10,
   },
   menuText: {
     textAlign: 'center',
     fontWeight: '500',
     padding: 8,
-    color: 'white',
+    color: colors.primary,
+  },
+  text: {
+    padding: 10,
+    lineHeight: 25,
   },
 });
 

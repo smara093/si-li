@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, FlatList, Button, TextInput } from 'react-native';
+import { View, FlatList, TextInput } from 'react-native';
 import { PropTypes } from 'prop-types';
 
 import styles from './styles/SimpleListStyles';
 import SimpleListItem from './SimpleListItem';
+import SimpleButton from './MenuButton';
 
 const itemKeyExtractor = item => item.id;
 
@@ -30,21 +31,23 @@ class SimpleList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={{ height: 60, flexDirection: 'row', padding: 10 }}>
+        <View
+          style={{
+            height: 60,
+            flexDirection: 'row',
+          }}
+        >
           <TextInput
             placeholder="type to add a new item"
             value={newItem}
             onSubmitEditing={() => onAddItemClick(newItem, list)}
             onChangeText={text => onChangeText(text)}
-            style={{ flex: 1 }}
+            style={{ flex: 1, paddingLeft: 10 }}
             underlineColorAndroid="transparent"
           />
-          <Button
-            title="Add"
-            onPress={() => onAddItemClick(newItem, list)}
-            color="purple"
-            style={{ flex: 1 }}
-          />
+          <View style={{ flex: 0.5 }}>
+            <SimpleButton title="Add" onPress={() => onAddItemClick(newItem, list)} />
+          </View>
         </View>
         {list.items &&
           list.items.length > 0 && (
@@ -56,11 +59,7 @@ class SimpleList extends React.Component {
                 extraData={this.state}
               />
               {onClearItemsClick && (
-                <Button
-                  title="Clear Items"
-                  onPress={() => onClearItemsClick(list)}
-                  color="purple"
-                />
+                <SimpleButton title="Clear Items" onPress={() => onClearItemsClick(list)} />
               )}
             </View>
           )}

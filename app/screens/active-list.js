@@ -13,7 +13,13 @@ class ActiveList extends React.PureComponent {
     return {
       title: (params && params.title) || 'my list',
       headerRight: (
-        <MenuButton screenName={screens.MyAccount} title="menu" navigation={navigation} />
+        <MenuButton
+          onPress={() => {
+            navigation.navigate(screens.MyAccount);
+          }}
+          title="menu"
+          navigation={navigation}
+        />
       ),
     };
   };
