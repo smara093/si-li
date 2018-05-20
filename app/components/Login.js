@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  Button,
-  ImageBackground,
-  Image,
-  TouchableNativeFeedback,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native';
 import { PropTypes } from 'prop-types';
 import styles, { colors } from '../components/styles/SimpleListStyles';
 import Title from '../components/Title';
@@ -40,17 +31,37 @@ class Login extends React.PureComponent {
 
     return (
       <View style={styles.container}>
-        <Title styles={styles} text="a simple list" />
+        <Title styles={styles} text="welcome to simple list" />
         {this.state.isAuthenticating === true && <ActivityIndicator size="small" color="#ef7de7" />}
         {this.state.isAuthenticating === false && (
-          <TouchableOpacity onPress={authenticateWithGoogle} useForeground>
-            <Image
-              // style={{ width: 382, height: 92 }}
-              style={{ width: 267, height: 64 }}
-              source={require('../assets/google-button.png')}
-            />
-          </TouchableOpacity>
-          // TODO: add option to continue without authentication
+          <View>
+            <Text
+              style={[
+                styles.text,
+                {
+                  alignSelf: 'center',
+                  textAlign: 'center',
+                  fontSize: 16,
+                  color: colors.primary,
+                  padding: 40,
+                  paddingTop: 70,
+                },
+              ]}
+            >
+              use your Google account to sign in and start creating lists
+            </Text>
+            <TouchableOpacity
+              style={{ padding: 10 }}
+              onPress={authenticateWithGoogle}
+              useForeground
+            >
+              <Image
+                style={{ width: 191, height: 46, alignSelf: 'center' }}
+                source={require('../assets/google-button-1x.png')}
+              />
+            </TouchableOpacity>
+            {/* TODO: add option to continue without authentication */}
+          </View>
         )}
       </View>
     );

@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     backgroundColor: colors.secondary,
+    color: colors.primary,
     padding: 15,
     marginBottom: 5,
     alignItems: 'center',
