@@ -1,7 +1,16 @@
 import React from 'react';
-import { ActivityIndicator, Button, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Button,
+  ImageBackground,
+  Image,
+  TouchableNativeFeedback,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { PropTypes } from 'prop-types';
-import styles from '../components/styles/SimpleListStyles';
+import styles, { colors } from '../components/styles/SimpleListStyles';
 import Title from '../components/Title';
 
 class Login extends React.PureComponent {
@@ -26,7 +35,7 @@ class Login extends React.PureComponent {
     const authenticateWithGoogle = async () => {
       this.setState({ isAuthenticating: true });
       await actions.authenticateWithGoogle();
-      this.setState({ isAuthenticating: false });
+      setTimeout(() => this.setState({ isAuthenticating: false }), 2000);
     };
 
     return (
@@ -34,8 +43,13 @@ class Login extends React.PureComponent {
         <Title styles={styles} text="a simple list" />
         {this.state.isAuthenticating === true && <ActivityIndicator size="small" color="#ef7de7" />}
         {this.state.isAuthenticating === false && (
-          <Button onPress={authenticateWithGoogle} title="Log in with Google" />
-          // TODO: add proper styling to comply with Google Auth branding requirements
+          <TouchableOpacity onPress={authenticateWithGoogle} useForeground>
+            <Image
+              // style={{ width: 382, height: 92 }}
+              style={{ width: 267, height: 64 }}
+              source={require('../assets/google-button.png')}
+            />
+          </TouchableOpacity>
           // TODO: add option to continue without authentication
         )}
       </View>

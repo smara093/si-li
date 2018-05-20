@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppLoading } from 'expo';
+import { AppLoading, Asset } from 'expo';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,6 +10,7 @@ import User from '../core/models/User';
 import LoginScreen from '../screens/login';
 import AppNavigator from '../navigators/AppNavigator';
 import * as actions from '../actions/appLoadingActions';
+import { Promise } from 'core-js';
 
 class AppLoadingScreen extends React.Component {
   static propTypes = {
@@ -21,8 +22,8 @@ class AppLoadingScreen extends React.Component {
     isAuthenticated: null,
   };
 
-  async initAppAsync() {
-    firebase.auth().onAuthStateChanged((user) => {
+  async initAuth() {
+    await firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ isAuthenticated: true });
         this.props.actions.dispatchUserAuthenticated(new User(user.uid, user.email, user.displayName));
@@ -30,6 +31,13 @@ class AppLoadingScreen extends React.Component {
         this.setState({ isAuthenticated: false });
       }
     });
+  }
+
+  async initAppAsync() {
+    return Promise.all([
+      this.initAuth(),
+      Asset.loadAsync([require('../assets/google-button.png')]),
+    ]);
   }
 
   render() {
