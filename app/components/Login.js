@@ -31,24 +31,35 @@ class Login extends React.PureComponent {
 
     return (
       <View style={styles.container}>
-        <Title styles={styles} text="welcome to simple list" />
-        {this.state.isAuthenticating === true && <ActivityIndicator size="small" color="#ef7de7" />}
+        <Title styles={styles} text="welcome" />
+        {this.state.isAuthenticating === true && (
+          <ActivityIndicator size="small" color={colors.secondary} />
+        )}
         {this.state.isAuthenticating === false && (
           <View>
+            <Image
+              source={require('../assets/large-logo.png')}
+              style={{
+                width: 122,
+                height: 78,
+                marginTop: 30,
+                padding: 20,
+                alignSelf: 'center',
+              }}
+            />
             <Text
               style={[
+                styles.baseText,
                 styles.text,
                 {
                   alignSelf: 'center',
                   textAlign: 'center',
                   fontSize: 16,
-                  color: colors.primary,
-                  padding: 40,
-                  paddingTop: 70,
+                  padding: 20,
                 },
               ]}
             >
-              use your Google account to sign in and start creating lists
+              use your Google account to sign in and start creating simple lists
             </Text>
             <TouchableOpacity
               style={{ padding: 10 }}

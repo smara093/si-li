@@ -36,7 +36,10 @@ class AppLoadingScreen extends React.Component {
   async initAppAsync() {
     return Promise.all([
       this.initAuth(),
-      Asset.loadAsync([require('../assets/google-button-1x.png')]),
+      Asset.loadAsync([
+        require('../assets/google-button-1x.png'),
+        require('../assets/large-logo.png'),
+      ]),
     ]);
   }
 

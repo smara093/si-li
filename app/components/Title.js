@@ -5,7 +5,7 @@ import { Text } from 'react-native';
 class Title extends React.PureComponent {
   render() {
     const { text, styles } = this.props;
-    return <Text style={styles.title}>{text}</Text>;
+    return <Text style={[styles.baseText, styles.title]}>{text}</Text>;
   }
 }
 

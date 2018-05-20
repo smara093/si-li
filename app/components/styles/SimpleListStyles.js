@@ -11,10 +11,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 25,
   },
+  baseText: {
+    color: colors.primary,
+  },
   title: {
     fontSize: 20,
     backgroundColor: colors.secondary,
-    color: colors.primary,
     padding: 15,
     marginBottom: 5,
     alignItems: 'center',
@@ -36,7 +38,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '500',
     padding: 8,
-    color: colors.primary,
   },
   text: {
     padding: 10,

@@ -13,7 +13,7 @@ class MenuButton extends React.PureComponent {
         background={TouchableNativeFeedback.Ripple(colors.secondary)}
       >
         <View style={styles.menuButton}>
-          <Text style={styles.menuText}>{title.toUpperCase()}</Text>
+          <Text style={[styles.baseText, styles.menuText]}>{title.toUpperCase()}</Text>
         </View>
       </TouchableNativeFeedback>
     );

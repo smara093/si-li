@@ -16,7 +16,7 @@ class MyAccount extends React.PureComponent {
     const { currentUser, onSignOut } = this.props;
     return (
       <View>
-        <Text style={styles.text}>
+        <Text style={[styles.baseText, styles.text]}>
           You are currently logged in as {currentUser.name} using {currentUser.email}.
         </Text>
         <SimpleButton onPress={onSignOut} title="Sign Out" />

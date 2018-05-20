@@ -17,7 +17,7 @@ class SimpleListItem extends React.PureComponent {
           }}
         >
           <View style={[styles.row, !item.isActive && styles.inactiveRow]}>
-            <Text>{item.text}</Text>
+            <Text style={[styles.baseText]}>{item.text}</Text>
           </View>
         </TouchableHighlight>
       </View>
