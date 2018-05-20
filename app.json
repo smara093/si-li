@@ -9,12 +9,13 @@
     "platforms": ["android"],
     "version": "1.0.0",
     "orientation": "portrait",
+    "primaryColor": "#76B59B",
     "icon": "./assets/icon.png",
     "githubUrl": "https://github.com/smara093/si-li",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ef7de7"
+      "backgroundColor": "#76B59B"
     },
     "android": {
       "package": "com.smaraf.sili"
