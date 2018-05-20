@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActivityIndicator } from 'react-native';
 import { PropTypes } from 'prop-types';
+import { Promise } from 'core-js';
+
 
 import User from '../core/models/User';
 import LoginScreen from '../screens/login';
 import AppNavigator from '../navigators/AppNavigator';
 import * as actions from '../actions/appLoadingActions';
-import { Promise } from 'core-js';
 
 class AppLoadingScreen extends React.Component {
   static propTypes = {
@@ -37,8 +38,8 @@ class AppLoadingScreen extends React.Component {
     return Promise.all([
       this.initAuth(),
       Asset.loadAsync([
-        require('../assets/google-button-1x.png'),
-        require('../assets/large-logo.png'),
+        require('../assets/google-button-1x.png'), // eslint-disable-line global-require
+        require('../assets/large-logo.png'), // eslint-disable-line global-require
       ]),
     ]);
   }

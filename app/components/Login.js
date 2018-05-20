@@ -38,7 +38,7 @@ class Login extends React.PureComponent {
         {this.state.isAuthenticating === false && (
           <View>
             <Image
-              source={require('../assets/large-logo.png')}
+              source={require('../assets/large-logo.png')} // eslint-disable-line global-require
               style={{
                 width: 122,
                 height: 78,
@@ -68,7 +68,7 @@ class Login extends React.PureComponent {
             >
               <Image
                 style={{ width: 191, height: 46, alignSelf: 'center' }}
-                source={require('../assets/google-button-1x.png')}
+                source={require('../assets/google-button-1x.png')} // eslint-disable-line global-require
               />
             </TouchableOpacity>
             {/* TODO: add option to continue without authentication */}
