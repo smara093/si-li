@@ -11,7 +11,7 @@ export function signOut() {
       .signOut()
       .then(() => {
         dispatch({
-          types: types.ACCOUNT_USER_SIGNED_OUT,
+          type: types.ACCOUNT_USER_SIGNED_OUT,
         });
       });
   };

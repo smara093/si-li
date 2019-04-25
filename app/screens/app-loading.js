@@ -69,7 +69,9 @@ class AppLoadingScreen extends React.Component {
   }
 }
 
-function mapStateToProps() {}
+function mapStateToProps() {
+  return {};
+}
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actions, dispatch),
